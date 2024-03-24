@@ -75,7 +75,7 @@ public class EPMetaTileEntities {
     public static EPMetaTileEntityMegaOilCrackingUnit MEGA_OIL_CRACKING_UNIT;
     public static EPMetaTileEntityMegaChemicalReactor MEGA_CHEMICAL_REACTOR;
 
-//    public static EPMetaTileEntityAlgaeFarm ALGAE_FARM;
+    public static EPMetaTileEntityAlgaeFarm ALGAE_FARM;
     public static EPMetaTileEntityIndustrialFishingPond INDUSTRIAL_FISHING_POND;
     public static EPMetaTileEntityRoaster ROASTER;
     public static EPMetaTileEntityIndustrialDrill INDUSTRIAL_DRILL;
@@ -210,7 +210,7 @@ public class EPMetaTileEntities {
         CHEMICAL_PLANT = registerMultiMetaTileEntity(15, new EPMetaTileEntityChemicalPlant(epId("chemical_plant")));
         MEGA_OIL_CRACKING_UNIT = registerMultiMetaTileEntity(16, new EPMetaTileEntityMegaOilCrackingUnit(epId("mega_oil_cracking_unit")));
         MEGA_CHEMICAL_REACTOR = registerMultiMetaTileEntity(17, new EPMetaTileEntityMegaChemicalReactor(epId("mega_chemical_reactor")));
-//        ALGAE_FARM = registerMultiMetaTileEntity(18, new EPMetaTileEntityAlgaeFarm(epId("algae_farm")));
+        ALGAE_FARM = registerMultiMetaTileEntity(18, new EPMetaTileEntityAlgaeFarm(epId("algae_farm")));
         INDUSTRIAL_FISHING_POND = registerMultiMetaTileEntity(19, new EPMetaTileEntityIndustrialFishingPond(epId("industrial_fishing_pond")));
         ROASTER = registerMultiMetaTileEntity(20, new EPMetaTileEntityRoaster(epId("roaster")));
         INDUSTRIAL_DRILL = registerMultiMetaTileEntity(21, new EPMetaTileEntityIndustrialDrill(epId("industrial_drill")));

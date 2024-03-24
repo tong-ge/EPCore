@@ -132,9 +132,9 @@ public class SimpleSteamMetaTileEntity extends SteamMetaTileEntity {
 
     @SideOnly(Side.CLIENT)
     @Override
-    protected void randomDisplayTick(float x, float y, float z, EnumParticleTypes flame, EnumParticleTypes smoke) {
-        super.randomDisplayTick(x, y, z, flame, smoke);
-        if (GTValues.RNG.nextBoolean()) this.getWorld().spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x, y + 0.5F, z, 0.0, 0.0, 0.0, new int[0]);
+    public void randomDisplayTick() {
+        super.randomDisplayTick();
+        if (GTValues.RNG.nextBoolean()) this.getWorld().spawnParticle(EnumParticleTypes.SMOKE_NORMAL, getPos().getX(), getPos().getY() + 0.5F, getPos().getZ(), 0.0, 0.0, 0.0, new int[0]);
     }
 
     @Override

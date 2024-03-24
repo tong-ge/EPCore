@@ -44,6 +44,8 @@ public class CommonProxy {
 
     public void preLoad() {}
 
+    public void onLoad() {}
+
     @SubscribeEvent
     public static void syncConfigValues(ConfigChangedEvent.OnConfigChangedEvent event) {}
 
@@ -70,6 +72,9 @@ public class CommonProxy {
         registry.register(EPMetablocks.EP_GLASS_CASING_B);
         registry.register(EPMetablocks.EP_ADV_GLASS_CASING);
         registry.register(EPMetablocks.EP_BLOCK_FUSION_CASING);
+        registry.register(EPMetablocks.EP_PINE_SAPLING);
+        registry.register(EPMetablocks.EP_PINE_LEAVES);
+        registry.register(EPMetablocks.EP_PINE_LOG);
     }
 
     @SubscribeEvent
@@ -95,6 +100,9 @@ public class CommonProxy {
         registry.register(createItemBlock(EPMetablocks.EP_GLASS_CASING_B, VariantItemBlock::new));
         registry.register(createItemBlock(EPMetablocks.EP_ADV_GLASS_CASING, VariantItemBlock::new));
         registry.register(createItemBlock(EPMetablocks.EP_BLOCK_FUSION_CASING, VariantItemBlock::new));
+        registry.register(createItemBlock(EPMetablocks.EP_PINE_SAPLING, ItemBlock::new));
+        registry.register(createItemBlock(EPMetablocks.EP_PINE_LOG, ItemBlock::new));
+        registry.register(createItemBlock(EPMetablocks.EP_PINE_LEAVES, ItemBlock::new));
         BehaviorAddition.init();
     }
 
@@ -149,6 +157,9 @@ public class CommonProxy {
         QFTCasingTierProperty.registerQFTCasingTier(4, I18n.format("epimorphism.machine.quantum_force_transformer.tier.4"));
         FormulaManager.init();
         EPRecipeManager.init();
+
+        //Oredict
+        EPMetablocks.registerOreDict();
     }
 
     @SubscribeEvent

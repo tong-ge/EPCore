@@ -703,6 +703,14 @@ public EPMaterials() {}
     public static Material GoldenAlgae;
     public static Material DryBrownAlgae;
     public static Material BrownAlgae;
+    public static Material UreaMix;
+    public static Material FermentationBase;
+    public static Material Resin;
+    public static Material CalciumCarbonate;
+    public static Material PropionicAcid;
+    public static Material SodiumAluminate;
+    public static Material RedMud;
+    public static Material PineOil;
 
     //  Range: 24000-28000
     public static void init() {

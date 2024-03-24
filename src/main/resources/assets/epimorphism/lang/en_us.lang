@@ -269,6 +269,11 @@ metaitem.crystal.system_on_chip_socket.tooltip=Bridging Crystal and Circuit
 metaitem.mill.grindball_soapstone.name=Soapstone Grindball
 metaitem.mill.grindball_aluminium.name=Aluminium Grindball
 
+#Pine
+tile.ep_pine_log.name=Pine Wood
+tile.ep_pine_leaves.name=Pine Leaves
+tile.ep_pine_sapling.name=Pine Sapling
+
 #  Multiblock Casings
 tile.ep_multiblock_casing.substrate_casing.name=Substrate Machine Casing
 tile.ep_multiblock_casing.advanced_substrate_casing.name=Advanced Substrate Machine Casing
@@ -976,6 +981,34 @@ gregtech.material.la_pr_nd_ce_oxides_solution=La-Pr-Nd-Ce Oxides Solution
 gregtech.material.sc_eu_gd_sm_oxides_solution=Sc-Eu-Gd-Sm Oxides Solution
 gregtech.material.y_tb_dy_ho_oxides_solution=Y-Tb-Dy-Ho Oxides Solution
 gregtech.material.er_tm_yb_lu_oxides_solution=Er-Tm-Yb-Lu Oxides Solution
+
+##  GT++ Biological Materials
+
+gregtech.material.resin=Resin
+gregtech.material.urea_mix=Urea Mixture
+gregtech.material.propionic_acid=Propionic Acid
+gregtech.material.red_mud=Red Mud
+gregtech.material.calcium_carbonate=Calcium-Carbonate
+gregtech.material.sodium_aluminate=Sodium Aluminate
+gregtech.material.fermentation_base=Fermentation Base
+gregtech.material.pine_oil=Pine Oil
+gregtech.material.corium=Corium
+gregtech.material.carbe_disulfide=Pine Oil
+
+metaitem.item.pine_cone.name=Pinecone
+metaitem.item.pine_fragment.name=Pine Fragment
+
+metaitem.item.biology_resin.name=Biology Risen
+metaitem.item.cellulose_fiber_yellow.name=Fiber Cellulose
+metaitem.item.cellulose_fiber_red.name=Fiber Cellulose
+metaitem.item.cellulose_fiber_green.name=Fiber Cellulose
+metaitem.item.compost.name=Compost
+metaitem.item.aluminium_mixture.name=Aluminium Mixture
+metaitem.item.cellulose_pulp.name=Cellulose Pulp
+metaitem.item.algae_acid.name=Algae Acid
+metaitem.item.pellets_mould.name=Pellets Mould
+metaitem.item.wood_pellets.name=Wood Pellets
+metaitem.item.aluminium_pellets.name=Aluminium Pellets
 
 ##  Mod Compatibility Materials
 gregtech.material.mana=Mana

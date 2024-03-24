@@ -1088,7 +1088,7 @@ public class EPFirstDegreeMaterials {
                 .iconSet(METALLIC)
                 .flags(GENERATE_FINE_WIRE)
                 .components(Silicon, 1, Carbon, 1)
-                .blast(2500, BlastProperty.GasTier.HIGH/*, VA[UV*/)
+                .blast(b -> b.temp(2500, BlastProperty.GasTier.HIGH).blastStats(VA[UV]))
                 .cableProperties(V[UHV], 6, 8)
                 .build();
         //  24144 Chromium Germanium Telluride
@@ -1183,7 +1183,7 @@ public class EPFirstDegreeMaterials {
                 .iconSet(MAGNETIC)
                 .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD)
                 .components(Neptunium, 1, Aluminium, 3)
-                .blast(1568, BlastProperty.GasTier.HIGHER/*, VA[ZPM]*/)
+                .blast(b -> b.temp(1568, BlastProperty.GasTier.HIGHER).blastStats(VA[ZPM]))
                 .build()
                 .setFormula("NpAl3", true);
         //  24155 Bismuth Trioxide
@@ -1225,7 +1225,7 @@ public class EPFirstDegreeMaterials {
                 .iconSet(BRIGHT)
                 .flags(GENERATE_PLATE, GENERATE_FOIL, GENERATE_FINE_WIRE)
                 .components(Mercury, 2, Cadmium, 1, Tellurium, 2)
-                .blast(2170, BlastProperty.GasTier.HIGHER/*, VA[UHV]*/)
+                .blast(b -> b.temp(2170, BlastProperty.GasTier.HIGHER).blastStats(VA[UHV]))
                 .build();
         //  24160 Cubic Zirconia
         CubicZirconia = new Material.Builder(getMaterialsId(), gregtechId("cubic_zirconia"))
@@ -2514,7 +2514,7 @@ public class EPFirstDegreeMaterials {
                 .plasma()
                 .color(0x5DBD3A)
                 .iconSet(BRIGHT)
-                .blast(12960, BlastProperty.GasTier.HIGHEST/*, VA[UEV]*/)
+                .blast(b -> b.temp(12960, BlastProperty.GasTier.HIGHEST).blastStats(VA[UEV]))
                 .flags(DISABLE_DECOMPOSITION, GENERATE_PLATE)
                 .build();
         //  24337 Fullerene Polymer Matrix

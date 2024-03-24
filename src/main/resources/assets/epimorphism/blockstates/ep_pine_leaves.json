@@ -1,0 +1,19 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "leaves",
+    "textures": {
+      "all": "epimorphism:blocks/wood/pine/leaves_pine"
+    }
+  },
+  "variants": {
+    "check_decay": {
+      "false": {},
+      "true": {}
+    },
+    "decayable": {
+      "false": {},
+      "true": {}
+    }
+  }
+}

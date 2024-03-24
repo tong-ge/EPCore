@@ -26,6 +26,12 @@ public class ClientProxy extends CommonProxy {
         EPTextures.preInit();
     }
 
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        EPMetablocks.registerColors();
+    }
+
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event) {
         EPMetablocks.registerItemModels();
