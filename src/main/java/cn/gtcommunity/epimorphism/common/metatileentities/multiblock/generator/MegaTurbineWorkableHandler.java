@@ -77,7 +77,7 @@ public class MegaTurbineWorkableHandler extends MultiblockFuelRecipeLogic {
     }
 
     @Override
-    protected boolean prepareRecipe(Recipe recipe) {
+    public boolean prepareRecipe(Recipe recipe) {
         List<IReinforcedRotorHolder> rotorHolders = ((IMegaTurbine) metaTileEntity).getRotorHolders();
         if (rotorHolders == null || !rotorHolders.get(0).hasRotor())
             return false;

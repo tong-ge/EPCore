@@ -1,6 +1,7 @@
 package cn.gtcommunity.epimorphism.api.unification.materials;
 
-import gregtech.api.fluids.fluidType.FluidTypes;
+import gregtech.api.fluids.FluidBuilder;
+import static gregtech.api.fluids.attribute.FluidAttributes.ACID;
 import gregtech.api.unification.material.Material;
 
 import static cn.gtcommunity.epimorphism.api.unification.EPMaterials.*;
@@ -15,13 +16,13 @@ public class EPSecondDegreeMaterials {
     public static void init() {
         //  25401 Dragon Breath
         DragonBreath = new Material.Builder(getMaterialsId(), gregtechId("dragon_breath"))
-                .fluid(FluidTypes.ACID)
+                .liquid(new FluidBuilder().attributes(ACID))
                 .color(0x9400D3)
                 .build()
                 .setFormula("Dc?", false);
         //  25402 Concentrate Dragon Breath
         ConcentrateDragonBreath = new Material.Builder(getMaterialsId(), gregtechId("concentrate_dragon_breath"))
-                .fluid(FluidTypes.ACID)
+                .liquid(new FluidBuilder().attributes(ACID))
                 .color(0x9400D3)
                 .build()
                 .setFormula("Dc2?", true);
@@ -34,8 +35,7 @@ public class EPSecondDegreeMaterials {
                 .setFormula("*Dc*Rn?", true);
         //  25404 Dragon Tear
         DragonTear = new Material.Builder(getMaterialsId(), gregtechId("dragon_tear"))
-                .fluid()
-                .fluidTemp(2992)
+                .liquid(new FluidBuilder().temperature(2992))
                 .color(0x9999FF)
                 .iconSet(DULL)
                 .build()

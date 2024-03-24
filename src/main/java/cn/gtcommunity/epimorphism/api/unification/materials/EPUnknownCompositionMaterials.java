@@ -1,6 +1,8 @@
 package cn.gtcommunity.epimorphism.api.unification.materials;
 
-import gregtech.api.fluids.fluidType.FluidTypes;
+import gregtech.api.fluids.FluidBuilder;
+import gregtech.api.fluids.FluidState;
+import gregtech.api.fluids.attribute.FluidAttributes;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import net.minecraft.util.text.TextFormatting;
@@ -29,7 +31,7 @@ public class EPUnknownCompositionMaterials {
                 .build();
         //  25203 Rich Nitrogen Mixture
         RichNitrogenMixture = new Material.Builder(getMaterialsId(), gregtechId("rich_nitrogen_mixture"))
-                .fluid(FluidTypes.GAS)
+                .liquid(new FluidBuilder().state(FluidState.GAS))
                 .color(0x6891D8)
                 .build();
         //  25204 Rich Ammonia Mixture
@@ -39,17 +41,15 @@ public class EPUnknownCompositionMaterials {
                 .build();
         //  25205 Blazing Pyrotheum
         BlazingPyrotheum = new Material.Builder(getMaterialsId(), gregtechId("blazing_pyrotheum"))
-                .fluid()
+                .liquid(new FluidBuilder().temperature(8000))
                 .color(Materials.Blaze.getMaterialRGB())
-                .fluidTemp(8000)
                 .components(Blaze, 2, Redstone, 1, Sulfur, 1)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
         //  25206 Gelid Cryotheum
         GelidCryotheum = new Material.Builder(getMaterialsId(), gregtechId("gelid_cryotheum"))
-                .fluid()
+                .liquid(new FluidBuilder().temperature(8))
                 .color(0x40B8FB)
-                .fluidTemp(8)
                 .components(Ice, 2, Electrotine, 1, Water, 1)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
@@ -71,12 +71,12 @@ public class EPUnknownCompositionMaterials {
                 .build();
         //  25210 Molybdenum Flue
         MolybdenumFlue = new Material.Builder(getMaterialsId(), gregtechId("molybdenum_flue"))
-                .fluid(FluidTypes.GAS)
+                .liquid(new FluidBuilder().state(FluidState.GAS))
                 .color(0x39194A)
                 .build();
         //  25211 Trace Rhenium Flue
         TraceRheniumFlue = new Material.Builder(getMaterialsId(), gregtechId("trace_rhenium_flue"))
-                .fluid(FluidTypes.GAS)
+                .liquid(new FluidBuilder().state(FluidState.GAS))
                 .color(0x96D6D5)
                 .build();
         //  25212 Chalcogen Anode Mud
@@ -130,9 +130,9 @@ public class EPUnknownCompositionMaterials {
                 .build();
         //  25220 Naquadah Gas
         NaquadahGas = new Material.Builder(getMaterialsId(), gregtechId("naquadah_gas"))
-                .fluid(FluidTypes.GAS)
+                .liquid(new FluidBuilder().state(FluidState.GAS).translation("gregtech.fluid.gas_generic"))
                 .color(0x0CD985)
-                .iconSet(GAS)
+                //.iconSet(GAS)
                 .build();
         //  25221 Fracturing Fluid
         FracturingFluid = new Material.Builder(getMaterialsId(), gregtechId("fracturing_fluid"))
@@ -148,7 +148,7 @@ public class EPUnknownCompositionMaterials {
                 .build();
         //  25223 Bedrock Smoke
         BedrockSmoke = new Material.Builder(getMaterialsId(), gregtechId("bedrock_smoke"))
-                .fluid(FluidTypes.GAS)
+                .liquid(new FluidBuilder().state(FluidState.GAS))
                 .color(0x525252)
                 .build();
         //  25224 Bedrock Soot Solution
@@ -163,42 +163,42 @@ public class EPUnknownCompositionMaterials {
                 .build();
         //  25226 Heavy Bedrock Smoke
         HeavyBedrockSmoke = new Material.Builder(getMaterialsId(), gregtechId("heavy_bedrock_smoke"))
-                .fluid(FluidTypes.GAS)
+                .liquid(new FluidBuilder().state(FluidState.GAS))
                 .color(0x242222)
                 .build();
         //  25227 Medium Bedrock Smoke
         MediumBedrockSmoke = new Material.Builder(getMaterialsId(), gregtechId("medium_bedrock_smoke"))
-                .fluid(FluidTypes.GAS)
+                .liquid(new FluidBuilder().state(FluidState.GAS))
                 .color(0x2E2C2C)
                 .build();
         //  25228 Light Bedrock Smoke
         LightBedrockSmoke = new Material.Builder(getMaterialsId(), gregtechId("light_bedrock_smoke"))
-                .fluid(FluidTypes.GAS)
+                .liquid(new FluidBuilder().state(FluidState.GAS))
                 .color(0x363333)
                 .build();
         //  25229 Ultralight Bedrock Smoke
         UltralightBedrockSmoke = new Material.Builder(getMaterialsId(), gregtechId("ultralight_bedrock_smoke"))
-                .fluid(FluidTypes.GAS)
+                .liquid(new FluidBuilder().state(FluidState.GAS))
                 .color(0x403D3D)
                 .build();
         //  25230 Heavy Taranium Gas
         HeavyTaraniumGas = new Material.Builder(getMaterialsId(), gregtechId("heavy_taranium_gas"))
-                .fluid(FluidTypes.GAS)
+                .liquid(new FluidBuilder().state(FluidState.GAS))
                 .color(0x262626)
                 .build();
         //  25231 Medium Taranium Gas
         MediumTaraniumGas = new Material.Builder(getMaterialsId(), gregtechId("medium_taranium_gas"))
-                .fluid(FluidTypes.GAS)
+                .liquid(new FluidBuilder().state(FluidState.GAS))
                 .color(0x313131)
                 .build();
         //  25232 Light Taranium Gas
         LightTaraniumGas = new Material.Builder(getMaterialsId(), gregtechId("light_taranium_gas"))
-                .fluid(FluidTypes.GAS)
+                .liquid(new FluidBuilder().state(FluidState.GAS))
                 .color(0x404040)
                 .build();
         //  25233 Bedrock Gas
         BedrockGas = new Material.Builder(getMaterialsId(), gregtechId("bedrock_gas"))
-                .fluid(FluidTypes.GAS)
+                .liquid(new FluidBuilder().state(FluidState.GAS))
                 .color(0x575757)
                 .build();
         //  25234 Cracked Heavy Taranium
@@ -228,32 +228,32 @@ public class EPUnknownCompositionMaterials {
                 .build();
         //  25239 Heavy Enriched Bedrock Smoke
         HeavyEnrichedBedrockSmoke = new Material.Builder(getMaterialsId(), gregtechId("heavy_enriched_bedrock_smoke"))
-                .fluid(FluidTypes.GAS)
+                .liquid(new FluidBuilder().state(FluidState.GAS))
                 .color(0x1A2222)
                 .build();
         //  25240 Medium Enriched Bedrock Smoke
         MediumEnrichedBedrockSmoke = new Material.Builder(getMaterialsId(), gregtechId("medium_enriched_bedrock_smoke"))
-                .fluid(FluidTypes.GAS)
+                .liquid(new FluidBuilder().state(FluidState.GAS))
                 .color(0x1E2C2C)
                 .build();
         //  25241 Light Enriched Bedrock Smoke
         LightEnrichedBedrockSmoke = new Material.Builder(getMaterialsId(), gregtechId("light_enriched_bedrock_smoke"))
-                .fluid(FluidTypes.GAS)
+                .liquid(new FluidBuilder().state(FluidState.GAS))
                 .color(0x163333)
                 .build();
         //  25242 Heavy Enriched Taranium Gas
         HeavyEnrichedTaraniumGas = new Material.Builder(getMaterialsId(), gregtechId("heavy_enriched_taranium_gas"))
-                .fluid(FluidTypes.GAS)
+                .liquid(new FluidBuilder().state(FluidState.GAS))
                 .color(0x1F2626)
                 .build();
         //  25243 Medium Enriched Taranium Gas
         MediumEnrichedTaraniumGas = new Material.Builder(getMaterialsId(), gregtechId("medium_enriched_taranium_gas"))
-                .fluid(FluidTypes.GAS)
+                .liquid(new FluidBuilder().state(FluidState.GAS))
                 .color(0x1F3131)
                 .build();
         //  25244 Light Enriched Taranium Gas
         LightEnrichedTaraniumGas = new Material.Builder(getMaterialsId(), gregtechId("light_enriched_taranium_gas"))
-                .fluid(FluidTypes.GAS)
+                .liquid(new FluidBuilder().state(FluidState.GAS))
                 .color(0x1F4040)
                 .build();
         //  25245 Cracked Heavy Enriched Taranium
@@ -391,35 +391,31 @@ public class EPUnknownCompositionMaterials {
                 .setFormula("(CH4)2Cl5", true);
         //  25266 Superheated Steam
         SuperheatedSteam = new Material.Builder(getMaterialsId(), gregtechId("superheated_steam"))
-                .fluid(FluidTypes.GAS, true)
-                .color(0xC4C4C4, false)
+                .liquid(new FluidBuilder().customStill().state(FluidState.GAS).temperature(573))
+                .color(0xC4C4C4)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Hydrogen, 2, Oxygen, 1)
-                .fluidTemp(573)
                 .build();
         //  25267 Supercritical Steam
         SupercriticalSteam = new Material.Builder(getMaterialsId(), gregtechId("supercritical_steam"))
-                .fluid(FluidTypes.GAS, true)
-                .color(0xC4C4C4, false)
+                .liquid(new FluidBuilder().customStill().state(FluidState.GAS).temperature(873))
+                .color(0xC4C4C4)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Hydrogen, 2, Oxygen, 1)
-                .fluidTemp(873)
                 .build();
         // 25268 High-Temperature Exhaust Gas
         HighTemperatureExhaustGas = new Material.Builder(getMaterialsId(), gregtechId("high_temperature_exhaust_gas"))
-                .fluid(FluidTypes.GAS)
+                .liquid(new FluidBuilder().state(FluidState.GAS).temperature(1123))
                 .color(0xF0EAD6)
-                .fluidTemp(1123)
                 .build();
         // 25269 Exhaust Gas
         ExhaustGas = new Material.Builder(getMaterialsId(), gregtechId("exhaust_gas"))
-                .fluid(FluidTypes.GAS)
+                .liquid(new FluidBuilder().state(FluidState.GAS).temperature(298))
                 .color(0xEDEADE)
-                .fluidTemp(298)
                 .build();
         //  25270 Nitrated Dragon Dust Solution
         NitratedDragonDustSolution = new Material.Builder(getMaterialsId(), gregtechId("nitrated_dragon_dust_solution"))
-                .fluid(FluidTypes.ACID)
+                .liquid(new FluidBuilder().attributes(FluidAttributes.ACID))
                 .color(0xF553FF)
                 .build();
         //  25271 Residual Draconium Solution
@@ -451,8 +447,7 @@ public class EPUnknownCompositionMaterials {
                 .build();
         //  25276 Quasi-fissioning Plasma
         QuasifissioningPlasma = new Material.Builder(getMaterialsId(), gregtechId("quasi_fissioning_plasma"))
-                .fluid(FluidTypes.PLASMA)
-                .fluidTemp(230490)
+                .liquid(new FluidBuilder().state(FluidState.PLASMA).temperature(230490))
                 .color(0xB0A2C3)
                 .build()
                 .setFormula(TextFormatting.OBFUSCATED + "aaa", false);

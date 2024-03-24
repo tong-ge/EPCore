@@ -51,10 +51,10 @@ public class EPToolRecipeHandler {
 
     public static void addToolRecipe(@Nonnull Material material, @Nonnull IGTTool tool, boolean mirrored, Object... recipe) {
         if (mirrored) {
-            ModHandler.addMirroredShapedRecipe(String.format("%s_%s", tool.getId(), material),
+            ModHandler.addMirroredShapedRecipe(String.format("%s_%s", tool.get(), material),
                     tool.get(material), recipe);
         } else {
-            ModHandler.addShapedRecipe(String.format("%s_%s", tool.getId(), material),
+            ModHandler.addShapedRecipe(String.format("%s_%s", tool.get(), material),
                     tool.get(material), recipe);
         }
     }

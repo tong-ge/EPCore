@@ -70,7 +70,7 @@ public class EPLargeTurbineWorkableHandler extends MultiblockFuelRecipeLogic {
     }
 
     @Override
-    protected boolean prepareRecipe(Recipe recipe) {
+    public boolean prepareRecipe(Recipe recipe) {
         IRotorHolder rotorHolder = ((EPMetaTileEntityLargeTurbine) metaTileEntity).getRotorHolder();
         if (rotorHolder == null || !rotorHolder.hasRotor())
             return false;

@@ -79,7 +79,7 @@ public class EPMetaTileEntityIndustrialMaintenanceHatch extends MetaTileEntityMu
     @Override
     protected void initializeInventory() {
         super.initializeInventory();
-        this.itemStackHandler = new TapeItemStackHandler(1);
+        this.itemStackHandler = new TapeItemStackHandler(this, 1);
         this.itemInventory = itemStackHandler;
     }
 

@@ -546,15 +546,15 @@ public class OreProcessingLogic implements IWorkable{
             t_output.add(EPUniverUtil.copyAmountUnsafe((long) time * item.getCount(), item));
         }
         //  计算产出概率
-        for (int i = 0; i < recipe.getChancedOutputs().size(); i++) {
-            int tChance = recipe.getChancedOutputs().get(i).getChance();
+        for (int i = 0; i < recipe.getChancedOutputs().getChancedEntries().size(); i++) {
+            int tChance = recipe.getChancedOutputs().getChancedEntries().get(i).getChance();
             // Use Normal Distribution 正态分布
             double u = time * (tChance / 10000D);
             double e = time * (tChance / 10000D) * (1 - (tChance / 10000D));
             Random random = new Random();
             int tAmount = (int) Math.ceil(Math.sqrt(e) * random.nextGaussian() + u);
             t_output.add(
-                    EPUniverUtil.copyAmountUnsafe((long) tAmount * recipe.getChancedOutputs().get(i).getItemStack().getCount(), recipe.getChancedOutputs().get(i).getItemStack()));
+                    EPUniverUtil.copyAmountUnsafe((long) tAmount * recipe.getChancedOutputs().getChancedEntries().get(i).getIngredient().getCount(), recipe.getChancedOutputs().getChancedEntries().get(i).getIngredient()));
         }
         return t_output.stream()
                 .filter(i -> (i != null && i.getCount() > 0))

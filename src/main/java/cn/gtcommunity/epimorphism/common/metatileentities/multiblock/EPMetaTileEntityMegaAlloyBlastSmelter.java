@@ -287,7 +287,7 @@ public class EPMetaTileEntityMegaAlloyBlastSmelter extends GlassTierMultiblockCo
         }
 
         @Override
-        protected long getMaxVoltage() {
+        public long getMaxVoltage() {
             return Math.min(GTValues.V[((GlassTierMultiblockController)this.metaTileEntity).getGlassTier()], super.getMaxVoltage());
         }
 

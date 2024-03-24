@@ -5,6 +5,7 @@ import cn.gtcommunity.epimorphism.client.renderer.texture.EPTextures;
 import cn.gtcommunity.epimorphism.common.blocks.EPBlockMultiblockCasingB;
 import cn.gtcommunity.epimorphism.common.blocks.EPMetablocks;
 import gregtech.api.capability.GregtechCapabilities;
+import gregtech.api.capability.GregtechDataCodes;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.metatileentity.IFastRenderMetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -14,12 +15,13 @@ import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.util.RelativeDirection;
 import gregtech.api.util.interpolate.Eases;
 import gregtech.client.renderer.ICubeRenderer;
+import gregtech.client.renderer.IRenderSetup;
 import gregtech.client.shader.postprocessing.BloomEffect;
-import gregtech.client.utils.BloomEffectUtil;
-import gregtech.client.utils.RenderBufferHelper;
-import gregtech.client.utils.RenderUtil;
+import gregtech.client.shader.postprocessing.BloomType;
+import gregtech.client.utils.*;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
@@ -42,42 +44,51 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 
-public class EPMetaTileEntityCompactCyclotron extends RecipeMapMultiblockController implements IFastRenderMetaTileEntity {
+public class EPMetaTileEntityCompactCyclotron extends RecipeMapMultiblockController implements IFastRenderMetaTileEntity, IBloomEffect {
 
-    private Integer color;
+    private static final int NO_COLOR = 0;
+    private int fusionRingColor = NO_COLOR;
 
-    static BloomEffectUtil.IBloomRenderFast RENDER_HANDLER = new BloomEffectUtil.IBloomRenderFast() {
+    @SideOnly(Side.CLIENT)
+    private boolean registeredBloomRenderTicket;
+    @SideOnly(Side.CLIENT)
+    private static final class FusionBloomSetup implements IRenderSetup {
+
+        private static final FusionBloomSetup INSTANCE = new FusionBloomSetup();
+
         float lastBrightnessX;
         float lastBrightnessY;
 
-        public int customBloomStyle() {
-            return ConfigHolder.client.shader.fusionBloom.useShader ? ConfigHolder.client.shader.fusionBloom.bloomStyle : -1;
-        }
+        @Override
+        public void preDraw(@Nonnull BufferBuilder buffer) {
+            BloomEffect.strength = (float) ConfigHolder.client.shader.fusionBloom.strength;
+            BloomEffect.baseBrightness = (float) ConfigHolder.client.shader.fusionBloom.baseBrightness;
+            BloomEffect.highBrightnessThreshold = (float) ConfigHolder.client.shader.fusionBloom.highBrightnessThreshold;
+            BloomEffect.lowBrightnessThreshold = (float) ConfigHolder.client.shader.fusionBloom.lowBrightnessThreshold;
+            BloomEffect.step = 1;
 
-        @SideOnly(Side.CLIENT)
-        public void preDraw(BufferBuilder buffer) {
-            BloomEffect.strength = (float)ConfigHolder.client.shader.fusionBloom.strength;
-            BloomEffect.baseBrightness = (float)ConfigHolder.client.shader.fusionBloom.baseBrightness;
-            BloomEffect.highBrightnessThreshold = (float)ConfigHolder.client.shader.fusionBloom.highBrightnessThreshold;
-            BloomEffect.lowBrightnessThreshold = (float)ConfigHolder.client.shader.fusionBloom.lowBrightnessThreshold;
-            BloomEffect.step = 1.0F;
-            this.lastBrightnessX = OpenGlHelper.lastBrightnessX;
-            this.lastBrightnessY = OpenGlHelper.lastBrightnessY;
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            lastBrightnessX = OpenGlHelper.lastBrightnessX;
+            lastBrightnessY = OpenGlHelper.lastBrightnessY;
+            GlStateManager.color(1, 1, 1, 1);
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240.0F, 240.0F);
             GlStateManager.disableTexture2D();
+
+            buffer.begin(GL11.GL_QUAD_STRIP, DefaultVertexFormats.POSITION_COLOR);
         }
 
-        @SideOnly(Side.CLIENT)
-        public void postDraw(BufferBuilder buffer) {
+        @Override
+        public void postDraw(@Nonnull BufferBuilder buffer) {
+            Tessellator.getInstance().draw();
+
             GlStateManager.enableTexture2D();
-            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, this.lastBrightnessX, this.lastBrightnessY);
+            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lastBrightnessX, lastBrightnessY);
         }
     };
 
@@ -154,68 +165,88 @@ public class EPMetaTileEntityCompactCyclotron extends RecipeMapMultiblockControl
 
     protected void updateFormedValid() {
         super.updateFormedValid();
-        if (this.recipeMapWorkable.isWorking() && this.color == null) {
-            if (this.recipeMapWorkable.getPreviousRecipe() != null && this.recipeMapWorkable.getPreviousRecipe().getFluidOutputs().size() > 0) {
-                int newColor = -16777216 | ((FluidStack)this.recipeMapWorkable.getPreviousRecipe().getFluidOutputs().get(0)).getFluid().getColor();
-                if (!Objects.equals(this.color, newColor)) {
-                    this.color = newColor;
-                    this.writeCustomData(371, this::writeColor);
-                }
+        if (recipeMapWorkable.isWorking() && fusionRingColor == NO_COLOR) {
+            if (recipeMapWorkable.getPreviousRecipe() != null &&
+                    !recipeMapWorkable.getPreviousRecipe().getFluidOutputs().isEmpty()) {
+                setFusionRingColor(0xFF000000 |
+                        recipeMapWorkable.getPreviousRecipe().getFluidOutputs().get(0).getFluid().getColor());
             }
-        } else if (!this.recipeMapWorkable.isWorking() && this.isStructureFormed() && this.color != null) {
-            this.color = null;
-            this.writeCustomData(371, this::writeColor);
+        } else if (!recipeMapWorkable.isWorking() && isStructureFormed()) {
+            setFusionRingColor(NO_COLOR);
         }
     }
 
+    @Override
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
-        this.writeColor(buf);
+        buf.writeVarInt(this.fusionRingColor);
     }
 
+    @Override
     public void receiveInitialSyncData(PacketBuffer buf) {
         super.receiveInitialSyncData(buf);
-        this.readColor(buf);
+        this.fusionRingColor = buf.readVarInt();
     }
 
+    @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
-        super.receiveCustomData(dataId, buf);
-        if (dataId == 371) {
-            this.readColor(buf);
-        }
-
-    }
-
-    private void readColor(PacketBuffer buf) {
-        this.color = buf.readBoolean() ? buf.readVarInt() : null;
-    }
-
-    private void writeColor(PacketBuffer buf) {
-        buf.writeBoolean(this.color != null);
-        if (this.color != null) {
-            buf.writeVarInt(this.color);
+        if (dataId == GregtechDataCodes.UPDATE_COLOR) {
+            this.fusionRingColor = buf.readVarInt();
+        } else {
+            super.receiveCustomData(dataId, buf);
         }
     }
 
+    protected int getFusionRingColor() {
+        return this.fusionRingColor;
+    }
+
+    protected boolean hasFusionRingColor() {
+        return this.fusionRingColor != NO_COLOR;
+    }
+
+    protected void setFusionRingColor(int fusionRingColor) {
+        if (this.fusionRingColor != fusionRingColor) {
+            this.fusionRingColor = fusionRingColor;
+            writeCustomData(GregtechDataCodes.UPDATE_COLOR, buf -> buf.writeVarInt(fusionRingColor));
+        }
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void renderBloomEffect(@Nonnull BufferBuilder buffer, @Nonnull EffectRenderContext context) {
+        if (!this.hasFusionRingColor()) return;
+        int color = RenderUtil.interpolateColor(this.getFusionRingColor(), -1, Eases.QUAD_IN.getInterpolation(
+                Math.abs((Math.abs(getOffsetTimer() % 50) + context.partialTicks()) - 25) / 25));
+        float a = (float) (color >> 24 & 255) / 255.0F;
+        float r = (float) (color >> 16 & 255) / 255.0F;
+        float g = (float) (color >> 8 & 255) / 255.0F;
+        float b = (float) (color & 255) / 255.0F;
+        EnumFacing relativeBack = RelativeDirection.BACK.getRelativeFacing(getFrontFacing(), getUpwardsFacing(),
+                isFlipped());
+        EnumFacing.Axis axis = RelativeDirection.UP.getRelativeFacing(getFrontFacing(), getUpwardsFacing(), isFlipped())
+                .getAxis();
+
+        RenderBufferHelper.renderRing(buffer,
+                getPos().getX() - context.cameraX() + relativeBack.getXOffset() * 7 + 0.5,
+                getPos().getY() - context.cameraY() + relativeBack.getYOffset() * 7 + 0.5,
+                getPos().getZ() - context.cameraZ() + relativeBack.getZOffset() * 7 + 0.5,
+                6, 0.2, 10, 20,
+                r, g, b, a, axis);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
     public void renderMetaTileEntity(double x, double y, double z, float partialTicks) {
-        if (this.color != null && MinecraftForgeClient.getRenderPass() == 0) {
-            int c = this.color;
-            BloomEffectUtil.requestCustomBloom(RENDER_HANDLER, (buffer) -> {
-                int color = (Integer) RenderUtil.colorInterpolator(c, -1).apply(Eases.EaseQuadIn.getInterpolation(Math.abs((float)Math.abs(this.getOffsetTimer() % 50L) + partialTicks - 25.0F) / 25.0F));
-                float a = (float)(color >> 24 & 255) / 255.0F;
-                float r = (float)(color >> 16 & 255) / 255.0F;
-                float g = (float)(color >> 8 & 255) / 255.0F;
-                float b = (float)(color & 255) / 255.0F;
-                Entity entity = Minecraft.getMinecraft().getRenderViewEntity();
-                if (entity != null) {
-                    buffer.begin(8, DefaultVertexFormats.POSITION_COLOR);
-                    RenderBufferHelper.renderRing(buffer, x + (double)(this.getFrontFacing().getOpposite().getXOffset() * 7) + 0.5, y + 0.5, z + (double)(this.getFrontFacing().getOpposite().getZOffset() * 7) + 0.5, 6.0, 0.2, 10, 20, r, g, b, a, EnumFacing.Axis.Y);
-                    Tessellator.getInstance().draw();
-                }
-
-            });
+        if (this.hasFusionRingColor() && !this.registeredBloomRenderTicket) {
+            this.registeredBloomRenderTicket = true;
+            BloomEffectUtil.registerBloomRender(FusionBloomSetup.INSTANCE, getBloomType(), this, this);
         }
+    }
 
+    private static BloomType getBloomType() {
+        ConfigHolder.FusionBloom fusionBloom = ConfigHolder.client.shader.fusionBloom;
+        return BloomType.fromValue(fusionBloom.useShader ? fusionBloom.bloomStyle : -1);
     }
 
     public AxisAlignedBB getRenderBoundingBox() {

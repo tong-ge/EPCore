@@ -15,7 +15,7 @@ public class PlasmaCondenserRecipes {
         PLASMA_CONDENSER_RECIPES.recipeBuilder()
                 .notConsumable(SHAPE_MOLD_PLATE)
                 .inputs(RHENIUM_PLASMA_CONTAINMENT_CELL.getStackForm())
-                .fluidInputs(LiquidHelium.getFluid(16000))
+                .fluidInputs(Helium.getFluid(16000))
                 .output(plate, DegenerateRhenium)
                 .outputs(PLASMA_CONTAINMENT_CELL.getStackForm())
                 .fluidOutputs(Helium.getFluid(16000))
@@ -37,7 +37,7 @@ public class PlasmaCondenserRecipes {
         //  Neutron
         PLASMA_CONDENSER_RECIPES.recipeBuilder()
                 .inputs(NEUTRON_PLASMA_CONTAINMENT_CELL.getStackForm())
-                .fluidInputs(LiquidHelium.getFluid(32000))
+                .fluidInputs(Helium.getFluid(32000))
                 .outputs(PLASMA_CONTAINMENT_CELL.getStackForm())
                 .fluidOutputs(Neutronium.getFluid(1000))
                 .fluidOutputs(Helium.getFluid(32000))
@@ -58,7 +58,7 @@ public class PlasmaCondenserRecipes {
         //  Hypogen
         PLASMA_CONDENSER_RECIPES.recipeBuilder()
                 .inputs(HYPOGEN_PLASMA_CONTAINMENT_CELL.getStackForm())
-                .fluidInputs(LiquidHelium.getFluid(64000))
+                .fluidInputs(Helium.getFluid(64000))
                 .outputs(PLASMA_CONTAINMENT_CELL.getStackForm())
                 .fluidOutputs(Hypogen.getFluid(1000))
                 .fluidOutputs(Helium.getFluid(64000))
@@ -79,7 +79,7 @@ public class PlasmaCondenserRecipes {
         //  Actinium Superhydride
         PLASMA_CONDENSER_RECIPES.recipeBuilder()
                 .inputs(ACTINIUM_SUPERHYDRIDE_PLASMA_CONTAINMENT_CELL.getStackForm())
-                .fluidInputs(LiquidHelium.getFluid(24000))
+                .fluidInputs(Helium.getFluid(24000))
                 .outputs(PLASMA_CONTAINMENT_CELL.getStackForm())
                 .output(dust, ActiniumSuperhydride, 13)
                 .fluidOutputs(Helium.getFluid(24000))
@@ -100,7 +100,7 @@ public class PlasmaCondenserRecipes {
         //  Heavy Quark Degenerate Matter
         PLASMA_CONDENSER_RECIPES.recipeBuilder()
                 .fluidInputs(HeavyQuarkDegenerateMatter.getPlasma(1000))
-                .fluidInputs(LiquidHelium.getFluid(28000))
+                .fluidInputs(Helium.getFluid(28000))
                 .fluidOutputs(HeavyQuarkDegenerateMatter.getFluid(1000))
                 .fluidOutputs(Helium.getFluid(28000))
                 .EUt(VA[UV])

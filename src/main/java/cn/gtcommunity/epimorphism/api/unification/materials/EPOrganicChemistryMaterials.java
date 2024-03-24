@@ -1,6 +1,7 @@
 package cn.gtcommunity.epimorphism.api.unification.materials;
 
-import gregtech.api.fluids.fluidType.FluidTypes;
+import gregtech.api.fluids.FluidBuilder;
+import gregtech.api.fluids.attribute.FluidAttributes;
 import gregtech.api.unification.material.Material;
 
 import static gregtech.api.GTValues.*;
@@ -93,11 +94,10 @@ public class EPOrganicChemistryMaterials {
         //  25009 Potassium Hydroxide
         PotassiumHydroxide = new Material.Builder(getMaterialsId(), gregtechId("potassium_hydroxide"))
                 .dust()
-                .fluid()
+                .liquid(new FluidBuilder().temperature(633))
                 .color(0xFA9849)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Potassium, 1, Oxygen, 1, Hydrogen, 1)
-                .fluidTemp(633)
                 .build();
         //  25010 Potassium Bromate
         PotassiumBromate = new Material.Builder(getMaterialsId(), gregtechId("potassium_bromate"))
@@ -139,7 +139,7 @@ public class EPOrganicChemistryMaterials {
                 .build();
         //  25015 Hydrobromic Acid
         HydrobromicAcid = new Material.Builder(getMaterialsId(), gregtechId("hydrobromic_acid"))
-                .fluid(FluidTypes.ACID)
+                .liquid(new FluidBuilder().attributes(FluidAttributes.ACID))
                 .color(0x8D1212)
                 .components(Hydrogen, 1, Bromine, 1)
                 .build();
@@ -286,6 +286,7 @@ public class EPOrganicChemistryMaterials {
         //  25036 Polyetheretherketone (PEEK)
         Polyetheretherketone = new Material.Builder(getMaterialsId(), gregtechId("polyetheretherketone"))
                 .polymer()
+                .fluid()
                 .color(0x45433D)
                 .flags(DISABLE_DECOMPOSITION, NO_SMASHING, NO_SMELTING, GENERATE_PLATE)
                 .components(Carbon, 20, Hydrogen, 12, Oxygen, 3)
@@ -326,6 +327,7 @@ public class EPOrganicChemistryMaterials {
         //  25042 Kevlar
         Kevlar = new Material.Builder(getMaterialsId(), gregtechId("kevlar"))
                 .polymer()
+                .fluid()
                 .color(0xF0F078)
                 .flags(DISABLE_DECOMPOSITION, NO_SMASHING, NO_SMELTING, GENERATE_PLATE)
                 .components(Carbon, 14, Hydrogen, 10, Nitrogen, 2, Oxygen, 2)
@@ -439,7 +441,7 @@ public class EPOrganicChemistryMaterials {
                 .build();
         //  25057 Methylamine
         Methylamine = new Material.Builder(getMaterialsId(), gregtechId("methylamine"))
-                .fluid(FluidTypes.GAS)
+                .gas()
                 .color(0xAA6600)
                 .components(Carbon, 1, Hydrogen, 5, Nitrogen, 1)
                 .build()
@@ -589,7 +591,7 @@ public class EPOrganicChemistryMaterials {
                 .setFormula("N(CH3)4Cl", true);
         //  25077 Trimethylamine
         Trimethylamine = new Material.Builder(getMaterialsId(), gregtechId("trimethylamine"))
-                .fluid(FluidTypes.GAS)
+                .gas()
                 .color(0xBB7700)
                 .components(Carbon, 3, Hydrogen, 9, Nitrogen, 1)
                 .build()
@@ -775,6 +777,7 @@ public class EPOrganicChemistryMaterials {
         //  25103 Zylon
         Zylon = new Material.Builder(getMaterialsId(), gregtechId("zylon"))
                 .polymer()
+                .fluid()
                 .color(0xFFE000)
                 .iconSet(SHINY)
                 .flags(DISABLE_DECOMPOSITION, NO_SMASHING, NO_SMELTING, GENERATE_PLATE, GENERATE_FOIL)
@@ -971,14 +974,15 @@ public class EPOrganicChemistryMaterials {
         //  25131 Nitrile Butadiene Rubber
         NitrileButadieneRubber = new Material.Builder(getMaterialsId(), gregtechId("nitrile_butadiene_rubber"))
                 .polymer()
+                .liquid(new FluidBuilder().temperature(433))
                 .color(0x211A18)
                 .flags(DISABLE_DECOMPOSITION, GENERATE_PLATE, GENERATE_RING)
                 .components(Carbon, 7, Hydrogen, 9, Nitrogen, 1)
-                .fluidTemp(433)
                 .build();
         //  25132 Poly (Phosphonitrile Fluoro) Rubber
         PolyPhosphonitrileFluoroRubber = new Material.Builder(getMaterialsId(), gregtechId("poly_phosphonitrile_fluoro_rubber"))
                 .polymer()
+                .fluid()
                 .color(0x372B28)
                 .flags(DISABLE_DECOMPOSITION, GENERATE_PLATE, GENERATE_RING)
                 .components(Carbon, 24, Hydrogen, 16, Oxygen, 8, Nitrogen, 4, Phosphorus, 4, Fluorine, 40)
@@ -1039,8 +1043,7 @@ public class EPOrganicChemistryMaterials {
                 .build();
         //  25141 Electrolyte Reflector Mixture
         ElectrolyteReflectorMixture = new Material.Builder(getMaterialsId(), gregtechId("electrolyte_reflector_mixture"))
-                .fluid()
-                .fluidTemp(209)
+                .liquid(new FluidBuilder().temperature(209))
                 .color(0xE62A35)
                 .components(ManganeseDifluoride, 1, ZincSulfide, 1, TantalumPentoxide, 1, Rutile, 1, Ethanol, 1)
                 .flags(DISABLE_DECOMPOSITION)
@@ -1166,6 +1169,7 @@ public class EPOrganicChemistryMaterials {
         //  25158 Fluorinated Ethylene Propylene
         FluorinatedEthylenePropylene = new Material.Builder(getMaterialsId(), gregtechId("fluorinated_ethylene_propylene"))
                 .polymer()
+                .fluid()
                 .color(0xC8C8C8)
                 .iconSet(DULL)
                 .components(Carbon, 5, Fluorine, 10)
