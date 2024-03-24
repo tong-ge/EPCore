@@ -1,6 +1,8 @@
 package cn.gtcommunity.epimorphism.api.unification.materials;
 
-import gregtech.api.fluids.fluidType.FluidTypes;
+import gregtech.api.fluids.FluidBuilder;
+import gregtech.api.fluids.FluidState;
+import static gregtech.api.fluids.attribute.FluidAttributes.ACID;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.BlastProperty;
 import gregtech.api.unification.material.properties.PropertyKey;
@@ -100,7 +102,7 @@ public class EPFirstDegreeMaterials {
                 .build();
         //  24010 Boron Trifluoride
         BoronTrifluoride = new Material.Builder(getMaterialsId(), gregtechId("boron_trifluoride"))
-                .fluid(FluidTypes.GAS)
+                .gas()
                 .color(0xFAF191)
                 .components(Boron, 1, Fluorine, 3)
                 .build();
@@ -121,7 +123,7 @@ public class EPFirstDegreeMaterials {
                 .build();
         //  24013 Diborane
         Diborane = new Material.Builder(getMaterialsId(), gregtechId("diborane"))
-                .fluid(FluidTypes.GAS)
+                .gas()
                 .color(0x3F3131)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Boron, 2, Hydrogen, 6)
@@ -135,7 +137,7 @@ public class EPFirstDegreeMaterials {
                 .build();
         //  24015 Boron Trichloride
         BoronTrichloride = new Material.Builder(getMaterialsId(), gregtechId("boron_trichloride"))
-                .fluid(FluidTypes.GAS)
+                .gas()
                 .color(0x033F1B)
                 .components(Boron, 1, Chlorine, 3)
                 .build();
@@ -208,7 +210,7 @@ public class EPFirstDegreeMaterials {
                 .build();
         //  24024 Chloroplatinic Acid
         ChloroplatinicAcid = new Material.Builder(getMaterialsId(), gregtechId("chloroplatinic_acid"))
-                .fluid(FluidTypes.ACID)
+                .liquid(new FluidBuilder().attributes(ACID))
                 .color(0xFFB546)
                 .components(Hydrogen, 2, Platinum, 1, Chlorine, 6)
                 .flags(DISABLE_DECOMPOSITION)
@@ -344,7 +346,7 @@ public class EPFirstDegreeMaterials {
                 .build();
         //  24044 Acidic Brominated Brine
         AcidicBrominatedBrine = new Material.Builder(getMaterialsId(), gregtechId("acidic_brominated_brine"))
-                .fluid(FluidTypes.ACID)
+                .liquid(new FluidBuilder().attributes(ACID))
                 .color(0xC6A76F)
                 .build()
                 .setFormula("Br?(H2SO4)Cl", true);
@@ -448,7 +450,7 @@ public class EPFirstDegreeMaterials {
                 .build();
         //  24059 Fluoroboric Acid
         FluoroboricAcid = new Material.Builder(getMaterialsId(), gregtechId("fluoroboric_acid"))
-                .fluid(FluidTypes.ACID)
+                .liquid(new FluidBuilder().attributes(ACID))
                 .color(0xD5811B)
                 .components(Hydrogen, 1, Boron, 1, Fluorine, 4)
                 .build();
@@ -491,8 +493,7 @@ public class EPFirstDegreeMaterials {
         //  24065 Gallium Trioxide
         GalliumTrioxide = new Material.Builder(getMaterialsId(), gregtechId("gallium_trioxide"))
                 .dust()
-                .fluid()
-                .fluidTemp(2170)
+                .liquid(new FluidBuilder().temperature(2170))
                 .color(0xE4CDFF)
                 .iconSet(METALLIC)
                 .components(Gallium, 1, Oxygen, 3)
@@ -667,7 +668,7 @@ public class EPFirstDegreeMaterials {
                 .build();
         //  24088 Phosphine
         Phosphine = new Material.Builder(getMaterialsId(), gregtechId("phosphine"))
-                .fluid(FluidTypes.GAS)
+                .gas()
                 .color(0xACB330)
                 .flags(DECOMPOSITION_BY_ELECTROLYZING, FLAMMABLE)
                 .components(Phosphorus, 1, Hydrogen, 3)
@@ -719,7 +720,7 @@ public class EPFirstDegreeMaterials {
                 .setFormula("XeAuSbKeF6S2?");
         //  24095 Xenoauric Fluoroantimonic Acid
         XenoauricFluoroantimonicAcid = new Material.Builder(getMaterialsId(), gregtechId("xenoauric_fluoroantimonic_acid"))
-                .fluid(FluidTypes.ACID)
+                .liquid(new FluidBuilder().attributes(ACID))
                 .color(0xE0BD74)
                 .components(Xenon, 1, Gold, 1, Antimony, 1, Fluorine, 6)
                 .flags(DISABLE_DECOMPOSITION)
@@ -1034,7 +1035,7 @@ public class EPFirstDegreeMaterials {
                 .iconSet(SHINY)
                 .flags(GENERATE_PLATE, NO_SMASHING, NO_WORKING, DECOMPOSITION_BY_CENTRIFUGING)
                 .components(Germanium, 2, Antimony, 2, Tellurium, 5)
-                .blastTemp(873, BlastProperty.GasTier.MID)
+                .blast(873, BlastProperty.GasTier.MID)
                 .build();
         //  24138 ZBLAN Glass
         ZBLANGlass = new Material.Builder(getMaterialsId(), gregtechId("zblan_glass"))
@@ -1087,7 +1088,7 @@ public class EPFirstDegreeMaterials {
                 .iconSet(METALLIC)
                 .flags(GENERATE_FINE_WIRE)
                 .components(Silicon, 1, Carbon, 1)
-                .blastTemp(2500, BlastProperty.GasTier.HIGH, VA[UV])
+                .blast(2500, BlastProperty.GasTier.HIGH/*, VA[UV*/)
                 .cableProperties(V[UHV], 6, 8)
                 .build();
         //  24144 Chromium Germanium Telluride
@@ -1098,7 +1099,7 @@ public class EPFirstDegreeMaterials {
                 .iconSet(METALLIC)
                 .flags(GENERATE_ROD, GENERATE_LONG_ROD)
                 .components(Chrome, 1, Germanium, 1, Tellurium, 3)
-                .blastTemp(2900, BlastProperty.GasTier.HIGHER)
+                .blast(2900, BlastProperty.GasTier.HIGHER)
                 .build();
         //  24145 Magnetic Chromium Germanium Telluride
         ChromiumGermaniumTellurideMagnetic = new Material.Builder(getMaterialsId(), gregtechId("magnetic_chromium_germanium_telluride"))
@@ -1182,7 +1183,7 @@ public class EPFirstDegreeMaterials {
                 .iconSet(MAGNETIC)
                 .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD)
                 .components(Neptunium, 1, Aluminium, 3)
-                .blastTemp(1568, BlastProperty.GasTier.HIGHER, VA[ZPM])
+                .blast(1568, BlastProperty.GasTier.HIGHER/*, VA[ZPM]*/)
                 .build()
                 .setFormula("NpAl3", true);
         //  24155 Bismuth Trioxide
@@ -1224,7 +1225,7 @@ public class EPFirstDegreeMaterials {
                 .iconSet(BRIGHT)
                 .flags(GENERATE_PLATE, GENERATE_FOIL, GENERATE_FINE_WIRE)
                 .components(Mercury, 2, Cadmium, 1, Tellurium, 2)
-                .blastTemp(2170, BlastProperty.GasTier.HIGHER, VA[UHV])
+                .blast(2170, BlastProperty.GasTier.HIGHER/*, VA[UHV]*/)
                 .build();
         //  24160 Cubic Zirconia
         CubicZirconia = new Material.Builder(getMaterialsId(), gregtechId("cubic_zirconia"))
@@ -1594,8 +1595,7 @@ public class EPFirstDegreeMaterials {
         //  24211 Neutron Star Core Material
         NeutronStarCoreMaterial = new Material.Builder(getMaterialsId(), gregtechId("neutron_star_core_material"))
                 .ingot()
-                .fluid()
-                .fluidTemp(2147483647)
+                .liquid(new FluidBuilder().temperature(2147483647))
                 .color(0x70ecff)
                 .iconSet(BRIGHT)
                 .flags(NO_SMASHING, NO_SMELTING, GENERATE_PLATE, GENERATE_CURVED_PLATE, GENERATE_ROTOR, GENERATE_FRAME, GENERATE_DOUBLE_PLATE)
@@ -1603,78 +1603,66 @@ public class EPFirstDegreeMaterials {
         //  24212 Magneto Hydrodynamically Constrained Star Matter
         MagnetoHydrodynamicallyConstrainedStarMatter = new Material.Builder(getMaterialsId(), gregtechId("magneto_hydrodynamically_constrained_star_matter"))
                 .ingot()
-                .fluid()
-                .fluidTemp(600000000)
+                .liquid(new FluidBuilder().temperature(600000000))
                 .iconSet(CUSTOM_MHCSM)
                 .flags(NO_SMELTING, GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR)
                 .build();
         //  24213 White Dwarf Matter
         WhiteDwarfMatter = new Material.Builder(getMaterialsId(), gregtechId("white_dwarf_matter"))
                 .ingot()
-                .fluid()
-                .fluidTemp(288000000)
+                .liquid(new FluidBuilder().temperature(288000000))
                 .iconSet(MAGNETIC)
                 .flags(GENERATE_ROD, GENERATE_LONG_ROD)
                 .build();
         //  24214 BlackDwarfMatter
         BlackDwarfMatter = new Material.Builder(getMaterialsId(), gregtechId("black_dwarf_matter"))
                 .ingot()
-                .fluid()
-                .fluidTemp(266000000)
+                .liquid(new FluidBuilder().temperature(266000000))
                 .color(0x000000)
                 .iconSet(BRIGHT)
                 .cableProperties(V[UIV], 144, 72, false)
                 .build();
         //  24215 Raw Star Matter
         RawStarMatter = new Material.Builder(getMaterialsId(), gregtechId("raw_star_matter"))
-                .fluid()
-                .fluidTemp(600000000)
+                .liquid(new FluidBuilder().temperature(600000000))
                 .build();
         //  24216 Dimensionally Transcendent Residue
         DimensionallyTranscendentResidue = new Material.Builder(getMaterialsId(), gregtechId("dimensionally_transcendent_residue"))
-                .fluid()
-                .fluidTemp(999999999)
+                .liquid(new FluidBuilder().temperature(999999999))
                 .build();
         //  24217 Heavy Lepton Mixture
         HeavyLeptonMixture = new Material.Builder(getMaterialsId(), gregtechId("heavy_lepton_mixture"))
-                .fluid()
-                .fluidTemp(524288)
+                .liquid(new FluidBuilder().temperature(524288))
                 .build()
                 .setFormula(TextFormatting.OBFUSCATED  + "a" + TextFormatting.RESET + "§e(t2)u" + TextFormatting.OBFUSCATED  + "a", true);
         //  24218 Heavy Quarks
         HeavyQuarks = new Material.Builder(getMaterialsId(), gregtechId("heavy_quarks"))
-                .fluid()
-                .fluidTemp(131072)
+                .liquid(new FluidBuilder().temperature(131072))
                 .build()
                 .setFormula(TextFormatting.OBFUSCATED  + "a"  + TextFormatting.RESET + "§e(u2)ds" + TextFormatting.OBFUSCATED  + "a" , true);
         //  24219 Gluons
         Gluons = new Material.Builder(getMaterialsId(), gregtechId("gluons"))
-                .fluid()
-                .fluidTemp(2097152)
+                .liquid(new FluidBuilder().temperature(2097152))
                 .build()
                 .setFormula(TextFormatting.OBFUSCATED  + "a" + TextFormatting.RESET + "§eg" + TextFormatting.OBFUSCATED  + "a", false);
         //  24220 Instantons
         Instantons = new Material.Builder(getMaterialsId(), gregtechId("instantons"))
-                .fluid()
-                .fluidTemp(8388608)
+                .liquid(new FluidBuilder().temperature(8388608))
                 .build()
                 .setFormula(TextFormatting.OBFUSCATED  + "a" + TextFormatting.RESET + "§ei" + TextFormatting.OBFUSCATED  + "a", false);
         //  24221 Temporal Fluid
         TemporalFluid = new Material.Builder(getMaterialsId(), gregtechId("temporal_fluid"))
-                .fluid()
-                .fluidTemp(134217728)
+                .liquid(new FluidBuilder().temperature(134217728))
                 .build()
                 .setFormula(TextFormatting.OBFUSCATED  + "a"  + TextFormatting.RESET + "§et" + TextFormatting.OBFUSCATED  + "a", false);
         //  24222 Higgs Bosons
         HiggsBosons = new Material.Builder(getMaterialsId(), gregtechId("higgs_bosons"))
-                .fluid()
-                .fluidTemp(0)
+                .liquid(new FluidBuilder().temperature(1))
                 .build()
                 .setFormula(TextFormatting.OBFUSCATED  + "a" + TextFormatting.RESET + "§eh" + TextFormatting.OBFUSCATED + "a", false);
         //  24223 Cosmic Computing Mixture
         CosmicComputingMixture = new Material.Builder(getMaterialsId(), gregtechId("cosmic_computing_mixture"))
-                .fluid()
-                .fluidTemp(536870912)
+                .liquid(new FluidBuilder().temperature(536870912))
                 .components(HeavyLeptonMixture, 32, HeavyQuarks, 8, Gluons, 8, Instantons, 4, TemporalFluid, 4, HiggsBosons, 4)
                 .flags(DISABLE_DECOMPOSITION)
                 .build()
@@ -1759,7 +1747,7 @@ public class EPFirstDegreeMaterials {
                 .build();
         //  24234 Nitrous Acid
         NitrousAcid = new Material.Builder(getMaterialsId(), gregtechId("nitrous_acid"))
-                .fluid(FluidTypes.ACID)
+                .liquid(new FluidBuilder().attributes(ACID))
                 .color(0x7D82A3)
                 .components(Hydrogen, 1, Nitrogen, 1, Oxygen, 2)
                 .build();
@@ -1806,22 +1794,20 @@ public class EPFirstDegreeMaterials {
                 .setFormula("(NH4)2CO3", true);
         //  24241 Free Electron Gas
         FreeElectronGas = new Material.Builder(getMaterialsId(), gregtechId("free_electron_gas"))
-                .fluid(FluidTypes.GAS)
+                .gas()
                 .color(0x507BB3)
                 .build()
                 .setFormula(TextFormatting.OBFUSCATED  + "a" + TextFormatting.RESET + "§ee" + TextFormatting.OBFUSCATED + "a", false);
         //  24242 Quark Gluon Plasma
         QuarkGluonPlasma = new Material.Builder(getMaterialsId(), gregtechId("quark_gluon_plasma"))
-                .fluid(FluidTypes.PLASMA)
+                .liquid(new FluidBuilder().state(FluidState.PLASMA).temperature((int) (V[ZPM] + V[UHV])/2))
                 .color(HeavyQuarks.getMaterialRGB() + Gluons.getMaterialRGB())
-                .fluidTemp((int) (V[ZPM] + V[UHV])/2)
                 .build()
                 .setFormula(TextFormatting.OBFUSCATED  + "a" + TextFormatting.RESET + "§e(u2)d(c2)s(t2)bg" + TextFormatting.OBFUSCATED + "a", false);
         //  24243 Light Quarks
         LightQuarks = new Material.Builder(getMaterialsId(), gregtechId("light_quarks"))
-                .fluid()
+                .liquid(new FluidBuilder().temperature((VA[ZPM] + VA[UHV])/2))
                 .color(QuarkGluonPlasma.getMaterialRGB() - HeavyQuarks.getMaterialRGB())
-                .fluidTemp((VA[ZPM] + VA[UHV])/2)
                 .build()
                 .setFormula(TextFormatting.OBFUSCATED  + "a" + TextFormatting.RESET + "§e(c2)(t2)b" + TextFormatting.OBFUSCATED + "a", false);
         //  24244 Ferric Catalyst
@@ -1832,14 +1818,13 @@ public class EPFirstDegreeMaterials {
                 .build();
         //  24245 Neutron
         Neutron = new Material.Builder(getMaterialsId(), gregtechId("neutron"))
-                .plasma()
-                .fluidTemp((int) V[UXV])
+                .plasma(new FluidBuilder().temperature((int) V[UXV]))
                 .color(0xFCFCFC)
                 .build()
                 .setFormula(TextFormatting.OBFUSCATED  + "a" + TextFormatting.RESET + "n§e" + TextFormatting.OBFUSCATED + "a", false);
         //  24246 Helium-Neon Gas
         HeliumNeon = new Material.Builder(getMaterialsId(), gregtechId("helium_neon"))
-                .fluid(FluidTypes.GAS)
+                .liquid(new FluidBuilder().state(FluidState.GAS))
                 .color(0xFF0080)
                 .flags(DECOMPOSITION_BY_CENTRIFUGING)
                 .components(Helium, 1, Neon, 1)
@@ -1913,7 +1898,7 @@ public class EPFirstDegreeMaterials {
                 .build();
         //  24256 Fluoroniobic Acid
         FluoroniobicAcid = new Material.Builder(getMaterialsId(), gregtechId("fluoroniobic_acid"))
-                .fluid(FluidTypes.ACID)
+                .liquid(new FluidBuilder().attributes(ACID))
                 .color(Niobium.getMaterialRGB() + HydrofluoricAcid.getMaterialRGB())
                 .components(Niobium, 1, Hydrogen, 1, Fluorine, 7)
                 .flags(DISABLE_DECOMPOSITION)
@@ -2071,7 +2056,7 @@ public class EPFirstDegreeMaterials {
                 .setFormula("PtCl2?", true);
         //  24276 Palladium Rich Ammonia
         PalladiumRichAmmonia = new Material.Builder(getMaterialsId(), gregtechId("palladium_rich_ammonia"))
-                .fluid(FluidTypes.GAS)
+                .gas()
                 .color(Palladium.getMaterialRGB() + Ammonia.getMaterialRGB())
                 .components(Palladium, 1, Ammonia, 1)
                 .flags(DISABLE_DECOMPOSITION)
@@ -2203,8 +2188,7 @@ public class EPFirstDegreeMaterials {
                 .build();
         //  24294 Hot Oganesson
         HotOganesson = new Material.Builder(getMaterialsId(), gregtechId("hot_oganesson"))
-                .fluid()
-                .fluidTemp(14118)
+                .liquid(new FluidBuilder().temperature(14118))
                 .color(Oganesson.getMaterialRGB())
                 .components(Oganesson, 1)
                 .flags(DISABLE_DECOMPOSITION)
@@ -2244,21 +2228,21 @@ public class EPFirstDegreeMaterials {
                 .build();
         //  24299 Californium Hexafluoride
         CaliforniumHexafluoride = new Material.Builder(getMaterialsId(), gregtechId("californium_hexafluoride"))
-                .fluid(FluidTypes.GAS)
+                .gas()
                 .color(Californium.getMaterialRGB() + Fluorine.getMaterialRGB())
                 .components(Californium, 2, Fluorine, 6)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
         //  24300 Californium-252 Hexafluoride
         Californium252Hexafluoride = new Material.Builder(getMaterialsId(), gregtechId("californium_252_hexafluoride"))
-                .fluid(FluidTypes.GAS)
+                .gas()
                 .color(Californium252.getMaterialRGB() + Fluorine.getMaterialRGB())
                 .components(Californium252, 2, Fluorine, 6)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
         //  24301 Steam Cracked Californium-252 Hexafluoride
         SteamCrackedCalifornium252Hexafluoride = new Material.Builder(getMaterialsId(), gregtechId("steam_cracked_californium_252_hexafluoride"))
-                .fluid(FluidTypes.GAS)
+                .gas()
                 .color(Californium252Hexafluoride.getMaterialRGB() + Steam.getMaterialRGB())
                 .components(Californium252, 2, Fluorine, 6)
                 .flags(DISABLE_DECOMPOSITION)
@@ -2362,7 +2346,7 @@ public class EPFirstDegreeMaterials {
                 .build();
         //  24314 Krypton Difluoride
         KryptonDifluoride = new Material.Builder(getMaterialsId(), gregtechId("krypton_difluoride"))
-                .fluid(FluidTypes.GAS)
+                .gas()
                 .color(Krypton.getMaterialRGB() + Fluorine.getMaterialRGB())
                 .components(Krypton, 1, Fluorine, 2)
                 .build();
@@ -2392,7 +2376,7 @@ public class EPFirstDegreeMaterials {
         //  24318 Actinium Superhydride
         ActiniumSuperhydride = new Material.Builder(getMaterialsId(), gregtechId("actinium_superhydride"))
                 .dust()
-                .fluid(FluidTypes.PLASMA)
+                .liquid(new FluidBuilder().state(FluidState.PLASMA))
                 .color(0xCC3300)
                 .iconSet(BRIGHT)
                 .components(Actinium, 1, Hydrogen, 12)
@@ -2413,8 +2397,7 @@ public class EPFirstDegreeMaterials {
                 .build();
         //  24321 Flerovium-Ytterbium Plasma
         FleroviumYtterbiumPlasma = new Material.Builder(getMaterialsId(), gregtechId("flerovium_ytterbium_plasma"))
-                .fluid(FluidTypes.PLASMA)
-                .fluidTemp(300)
+                .liquid(new FluidBuilder().state(FluidState.PLASMA).temperature(300))
                 .components(MetastableFlerovium, 1, Ytterbium178, 1)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
@@ -2443,7 +2426,7 @@ public class EPFirstDegreeMaterials {
         RP1RocketFuel = new Material.Builder(getMaterialsId(), gregtechId("rp_1_rocket_fuel"))
                 .fluid()
                 .color(0xFB2A08)
-                .components(HighlyPurifiedCoalTar, 1, LiquidOxygen, 1)
+                .components(HighlyPurifiedCoalTar, 1, Oxygen, 1)
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
         //  24326 Methylhydrazine
@@ -2465,7 +2448,7 @@ public class EPFirstDegreeMaterials {
                 .color(0xD27700)
                 .iconSet(SHINY)
                 .components(Lithium, 1, Niobium, 1, Oxygen, 4)
-                .blastTemp(6700)
+                .blast(6700)
                 .flags(DISABLE_DECOMPOSITION)
                 .flags(GENERATE_PLATE, GENERATE_LENS)
                 .build();
@@ -2531,15 +2514,16 @@ public class EPFirstDegreeMaterials {
                 .plasma()
                 .color(0x5DBD3A)
                 .iconSet(BRIGHT)
-                .blastTemp(12960, BlastProperty.GasTier.HIGHEST, VA[UEV])
+                .blast(12960, BlastProperty.GasTier.HIGHEST/*, VA[UEV]*/)
                 .flags(DISABLE_DECOMPOSITION, GENERATE_PLATE)
                 .build();
         //  24337 Fullerene Polymer Matrix
         FullerenePolymerMatrix = new Material.Builder(getMaterialsId(), gregtechId("fullerene_polymer_matrix"))
                 .polymer()
+                .fluid()
                 .color(0x2F0B01)
                 .iconSet(SHINY)
-                .fluidTemp(500)
+                .blast(500)
                 .components(Lead, 1, Iron, 1, Carbon, 153, Hydrogen, 36, Nitrogen, 1, Oxygen, 2)
                 .flags(DISABLE_DECOMPOSITION, NO_SMASHING, NO_SMELTING, GENERATE_PLATE, GENERATE_FOIL)
                 .build();
@@ -2614,7 +2598,7 @@ public class EPFirstDegreeMaterials {
                 .fluid()
                 .color(0xFE71A9)
                 .iconSet(SHINY)
-                .blastTemp(3100)
+                .blast(3100)
                 .components(Lithium, 2, Titanium, 1, Oxygen, 3)
                 .flags(DISABLE_DECOMPOSITION, GENERATE_FINE_WIRE)
                 .build();

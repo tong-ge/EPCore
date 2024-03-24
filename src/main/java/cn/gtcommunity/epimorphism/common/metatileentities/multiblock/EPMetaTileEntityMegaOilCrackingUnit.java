@@ -389,7 +389,7 @@ public class EPMetaTileEntityMegaOilCrackingUnit extends GlassTierMultiblockCont
         }
 
         @Override
-        protected long getMaxVoltage() {
+        public long getMaxVoltage() {
             return Math.min(GTValues.V[((GlassTierMultiblockController)this.metaTileEntity).getGlassTier()], super.getMaxVoltage());
         }
 

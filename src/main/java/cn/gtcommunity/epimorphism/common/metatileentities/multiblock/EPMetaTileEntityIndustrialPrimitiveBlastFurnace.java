@@ -37,7 +37,7 @@ public class EPMetaTileEntityIndustrialPrimitiveBlastFurnace extends NoEnergyMul
 
     private byte auxiliaryBlastFurnaceNumber = 0;
 
-    private static final TraceabilityPredicate IS_SNOW_LAYER = new TraceabilityPredicate(bws -> GTUtility.isBlockSnowLayer(bws.getBlockState()));
+    private static final TraceabilityPredicate IS_SNOW_LAYER = new TraceabilityPredicate(bws -> GTUtility.isBlockSnow(bws.getBlockState()));
 
     public EPMetaTileEntityIndustrialPrimitiveBlastFurnace(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.PRIMITIVE_BLAST_FURNACE_RECIPES);

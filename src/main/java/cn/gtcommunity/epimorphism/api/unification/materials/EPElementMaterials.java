@@ -1,7 +1,8 @@
 package cn.gtcommunity.epimorphism.api.unification.materials;
 
 import cn.gtcommunity.epimorphism.api.unification.EPElements;
-import gregtech.api.fluids.fluidType.FluidTypes;
+import gregtech.api.fluids.FluidBuilder;
+import gregtech.api.fluids.FluidState;
 import gregtech.api.unification.Elements;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.BlastProperty;
@@ -37,7 +38,7 @@ public class EPElementMaterials {
                                        .enchantment(Enchantments.EFFICIENCY, 5)
                                        .enchantment(Enchantments.FORTUNE, 5)
                                        .build())
-                .blastTemp(10800, BlastProperty.GasTier.HIGHEST, VA[UHV])
+                .blast(10800, BlastProperty.GasTier.HIGHEST/*, VA[UHV]*/)
                 .build();
         //  26002 Awakened Draconium
         AwakenedDraconium = new Material.Builder(getMaterialsId(), gregtechId("awakened_draconium"))
@@ -47,7 +48,7 @@ public class EPElementMaterials {
                 .iconSet(BRIGHT)
                 .flags(GENERATE_PLATE, GENERATE_FOIL, GENERATE_FINE_WIRE)
                 .element(EPElements.AwakenedDraconium)
-                .blastTemp(10800, BlastProperty.GasTier.HIGHEST, VA[UV])
+                .blast(10800, BlastProperty.GasTier.HIGHEST/*, VA[UV]*/)
                 .cableProperties(V[UHV], 16, 4)
                 .build();
         //  26003 Chaotic Draconium
@@ -69,7 +70,7 @@ public class EPElementMaterials {
                 .iconSet(METALLIC)
                 .element(EPElements.Orichalcum)
                 .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_FRAME, GENERATE_GEAR)
-                .blastTemp(9000, BlastProperty.GasTier.HIGH)
+                .blast(9000, BlastProperty.GasTier.HIGH)
                 .build();
         //  26005 Vibranium
         Vibranium = new Material.Builder(getMaterialsId(), gregtechId("vibranium"))
@@ -80,7 +81,7 @@ public class EPElementMaterials {
                 .iconSet(SHINY)
                 .flags(GENERATE_PLATE, GENERATE_FOIL, GENERATE_DOUBLE_PLATE, GENERATE_FINE_WIRE, GENERATE_FRAME, GENERATE_COIL, GENERATE_BOLT_SCREW)
                 .element(EPElements.Vibranium)
-                .blastTemp(4852, BlastProperty.GasTier.HIGH)
+                .blast(4852, BlastProperty.GasTier.HIGH)
                 .build();
         //  26006 Adamantium
         Adamantium = new Material.Builder(getMaterialsId(), gregtechId("adamantium"))
@@ -91,7 +92,7 @@ public class EPElementMaterials {
                 .iconSet(METALLIC)
                 .flags(GENERATE_PLATE, GENERATE_ROTOR, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND, GENERATE_SPRING, GENERATE_CURVED_PLATE, GENERATE_DOUBLE_PLATE)
                 .element(EPElements.Adamantium)
-                .blastTemp(5225, BlastProperty.GasTier.HIGH)
+                .blast(5225, BlastProperty.GasTier.HIGH)
                 .cableProperties(VA[UHV], 18, 9, false)
                 .build();
         //  26007 Taranium
@@ -115,12 +116,12 @@ public class EPElementMaterials {
         //  26009 Metastable Oganesson
         MetastableOganesson = new Material.Builder(getMaterialsId(), gregtechId("metastable_oganesson"))
                 .ingot()
-                .fluid(FluidTypes.GAS)
+                .gas()
                 .color(0xE61C24)
                 .iconSet(SHINY)
                 .element(Elements.Og)
                 .flags(GENERATE_PLATE)
-                .blastTemp(10380)
+                .blast(10380)
                 .build();
         //  TODO Radium-Radon Mixture + Scandium-Titanium-50 Mixture -> Metastable Hassium
         //  26010 Metastable Hassium
@@ -131,7 +132,7 @@ public class EPElementMaterials {
                 .iconSet(BRIGHT)
                 .element(Elements.Hs)
                 .flags(GENERATE_ROD, GENERATE_PLATE)
-                .blastTemp(11240, BlastProperty.GasTier.HIGHEST)
+                .blast(11240, BlastProperty.GasTier.HIGHEST)
                 .build();
         //  26011 Metastable Flerovium
         MetastableFlerovium = new Material.Builder(getMaterialsId(), gregtechId("metastable_flerovium"))
@@ -145,19 +146,17 @@ public class EPElementMaterials {
         //  26012 Cosmic Neutronium
         CosmicNeutronium = new Material.Builder(getMaterialsId(), gregtechId("cosmic_neutronium"))
                 .ingot()
-                .fluid()
+                .liquid(new FluidBuilder().temperature(2000000000))
                 .color(0x323232)
                 .iconSet(BRIGHT)
                 .flags(NO_SMELTING, NO_SMASHING, GENERATE_FINE_WIRE)
-                .fluidTemp(2000000000)
                 .element(EPElements.CosmicNeutronium)
                 .cableProperties(V[UIV], 256, 128, false)
                 .build();
         //  26013 Degenerate Rhenium
         DegenerateRhenium = new Material.Builder(getMaterialsId(), gregtechId("degenerate_rhenium"))
                 .dust()
-                .fluid(FluidTypes.PLASMA)
-                .fluidTemp((int) V[UV])
+                .liquid(new FluidBuilder().state(FluidState.PLASMA).temperature((int)V[UV]))
                 .color(0x6666FF)
                 .iconSet(CUSTOM_DEGENERATE_RHENIUM)
                 .element(Elements.Rh)
@@ -167,30 +166,27 @@ public class EPElementMaterials {
         //  26014 Infinity
         Infinity = new Material.Builder(getMaterialsId(), gregtechId("infinity"))
                 .ingot()
-                .fluid()
+                .liquid(new FluidBuilder().temperature((int) V[UIV]))
                 .iconSet(CUSTOM_INFINITY)
-                .fluidTemp((int) V[UIV])
                 .element(EPElements.Infinity)
-                .blastTemp(12600, BlastProperty.GasTier.HIGHEST, VA[UHV], 5901)
+                .blast(12600, BlastProperty.GasTier.HIGHEST/*, VA[UHV], 5901*/)
                 .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_FOIL, GENERATE_FINE_WIRE)
                 .build();
         //  26015 Rhugnor
         Rhugnor = new Material.Builder(getMaterialsId(), gregtechId("rhugnor"))
                 .ingot()
-                .fluid()
-                .fluidTemp((int) (V[UIV] - V[UV]))
+                .liquid(new FluidBuilder().temperature((int) (V[UIV] - V[UV])))
                 .color(0xBE00FF)
                 .iconSet(BRIGHT)
                 .element(EPElements.Rhugnor)
-                .blastTemp(12000, BlastProperty.GasTier.HIGHEST, VA[UHV], 3340)
+                .blast(12000, BlastProperty.GasTier.HIGHEST/*, VA[UHV], 3340*/)
                 .flags(GENERATE_PLATE)
                 .build();
         //  26016 Hypogen
         Hypogen = new Material.Builder(getMaterialsId(), gregtechId("hypogen"))
                 .ingot()
-                .fluid()
+                .liquid(new FluidBuilder().temperature((int) (V[UXV] - V[LuV])))
                 .plasma()
-                .fluidTemp((int) (V[UXV] - V[LuV]))
                 .element(EPElements.Hypogen)
                 .color(0xDC784B)
                 .iconSet(CUSTOM_HYPOGEN)
@@ -219,7 +215,7 @@ public class EPElementMaterials {
                 .color(0xDCA0F0)
                 .iconSet(BRIGHT)
                 //  TODO may be re-balance
-                .blastTemp(12000, BlastProperty.GasTier.HIGHEST, VA[UHV])
+                .blast(12000, BlastProperty.GasTier.HIGHEST/*, VA[UHV]*/)
                 .element(EPElements.AstralTitanium)
                 .flags(GENERATE_PLATE, GENERATE_FOIL)
                 .build();
@@ -231,7 +227,7 @@ public class EPElementMaterials {
                 .color(0x323232)
                 .iconSet(BRIGHT)
                 //  TODO may be re-balance
-                .blastTemp(12000, BlastProperty.GasTier.HIGHEST, VA[UHV])
+                .blast(12000, BlastProperty.GasTier.HIGHEST/*, VA[UHV]*/)
                 .element(EPElements.CelestialTungsten)
                 .flags(GENERATE_PLATE, GENERATE_FOIL, GENERATE_ROD, GENERATE_BOLT_SCREW)
                 .build();
@@ -249,31 +245,28 @@ public class EPElementMaterials {
                 .fluid()
                 .color(0xE5A559)
                 .iconSet(BRIGHT)
-                .blastTemp(10800, BlastProperty.GasTier.HIGHEST, VA[UV])
+                .blast(10800, BlastProperty.GasTier.HIGHEST/*, VA[UV]*/)
                 .element(EPElements.Ichorium)
                 .flags(GENERATE_PLATE)
                 .build();
         //  26022 Ichor Liquid
         IchorLiquid = new Material.Builder(getMaterialsId(), gregtechId("ichor_liquid"))
-                .fluid(FluidTypes.PLASMA)
-                .fluidTemp(214748)
+                .liquid(new FluidBuilder().state(FluidState.PLASMA).temperature(214748))
                 .color(0xE5A559)
                 .element(EPElements.IchorLiquid)
                 .build();
         //  26023 Crystal Matrix
         CrystalMatrix = new Material.Builder(getMaterialsId(), gregtechId("crystal_matrix"))
                 .ingot()
-                .fluid()
-                .fluidTemp(660450)
+                .liquid(new FluidBuilder().temperature(660450))
                 .color(0x70ecff)
                 .iconSet(BRIGHT)
                 .element(EPElements.CrystalMatrix)
                 .build();
         //  26024 Void Metal
-        VoidMetal = new Material.Builder(getMaterialsId(), gregtechId("void_metal"))
+        VoidMetal = new Material.Builder(getMaterialsId(), gregtechId("void"))
                 .ingot()
-                .fluid()
-                .fluidTemp(0)
+                .liquid(new FluidBuilder().temperature(1))
                 .color(0x20142C)
                 .iconSet(DULL)
                 .element(EPElements.VoidMetal)
@@ -281,12 +274,11 @@ public class EPElementMaterials {
         //  26025 Mithril
         Mithril = new Material.Builder(getMaterialsId(), gregtechId("mithril"))
                 .ingot()
-                .fluid()
+                .liquid(new FluidBuilder().temperature(4550))
                 .plasma()
-                .fluidTemp(4550)
                 .color(0x428fdb)
                 .iconSet(DULL)
-                .blastTemp(10900, BlastProperty.GasTier.HIGHEST, VA[UHV])
+                .blast(10900, BlastProperty.GasTier.HIGHEST/*, VA[UHV]*/)
                 .element(EPElements.Mithril)
                 .flags(GENERATE_PLATE, GENERATE_FOIL, GENERATE_FINE_WIRE)
                 .build();

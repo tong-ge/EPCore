@@ -402,11 +402,6 @@ public class EPMetaTileEntityIntegratedOreFactory extends MultiblockWithDisplayB
     }
 
     @Override
-    public void writeCustomData(int discriminator, Consumer<PacketBuffer> dataWriter) {
-        super.writeCustomData(discriminator, dataWriter);
-    }
-
-    @Override
     public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
         this.logic.receiveCustomData(dataId, buf);

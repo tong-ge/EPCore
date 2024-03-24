@@ -69,7 +69,7 @@ public class EPMetaTileEntityIndustrialDrill extends RecipeMapMultiblockControll
     @Override
     protected void initializeAbilities() {
         super.initializeAbilities();
-        this.inputInventory = new NotifiableItemStackHandler(1, this, false);
+        this.inputInventory = new NotifiableItemStackHandler(this, 1, this, false);
     }
 
 

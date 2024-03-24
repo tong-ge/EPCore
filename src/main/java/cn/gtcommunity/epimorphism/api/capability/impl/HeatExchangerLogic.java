@@ -89,7 +89,7 @@ public class HeatExchangerLogic extends NoEnergyMultiblockRecipeLogic {
     }
 
     @Override
-    protected boolean prepareRecipe(Recipe recipe) {
+    public boolean prepareRecipe(Recipe recipe) {
         FluidStack recipeFluidStack = recipe.getFluidInputs().get(1).getInputFluidStack();
         FluidStack inputFluidStack = getInputFluidStack(recipeFluidStack);
         IHeatExchanger mte = (IHeatExchanger)metaTileEntity;

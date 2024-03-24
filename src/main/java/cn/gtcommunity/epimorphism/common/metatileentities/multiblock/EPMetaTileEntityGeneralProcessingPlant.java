@@ -219,7 +219,7 @@ public class EPMetaTileEntityGeneralProcessingPlant extends MultiMapMultiblockCo
         }
     }
     @Override
-    protected void addMaintenanceText(List<ITextComponent> textList) {
+    protected void addDisplayText(List<ITextComponent> textList) {
         if (hasMaintenanceProblems()) {
             ITextComponent hoverEventTranslation = new TextComponentTranslation("gregtech.multiblock.universal.has_problems");
 

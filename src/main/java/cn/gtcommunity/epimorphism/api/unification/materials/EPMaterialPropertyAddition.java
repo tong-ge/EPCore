@@ -24,7 +24,7 @@ public class EPMaterialPropertyAddition {
         Bromine.setProperty(PropertyKey.FLUID, new FluidProperty());
         Rhenium.setProperty(PropertyKey.INGOT, new IngotProperty());
         Germanium.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Germanium.setProperty(PropertyKey.BLAST, new BlastProperty(1211, BlastProperty.GasTier.HIGH, VA[EV], 1200));
+        Germanium.setProperty(PropertyKey.BLAST, new BlastProperty(1211, BlastProperty.GasTier.HIGH/*, VA[EV], 1200*/));
         Germanium.setProperty(PropertyKey.FLUID, new FluidProperty());
         Rubidium.setProperty(PropertyKey.DUST, new DustProperty());
         SodiumHydroxide.setProperty(PropertyKey.FLUID, new FluidProperty());
@@ -164,7 +164,7 @@ public class EPMaterialPropertyAddition {
 
         //  Fluid Temperatures
         FluidProperty prop = new FluidProperty();
-        prop.setFluidTemperature(332);
+        //prop.setFluidTemperature(332);
         SodiumBisulfate.setProperty(PropertyKey.FLUID, prop);
 
         //  Wire Properties

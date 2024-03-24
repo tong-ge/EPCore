@@ -58,7 +58,7 @@ public class SimpleSteamMetaTileEntity extends SteamMetaTileEntity {
 
         //  If machine enable ghost circuit, then add new ghost circuit slot in machine ui.
         if (hasGhostCircuitInventory()) {
-            this.circuitInventory = new GhostCircuitItemStackHandler();
+            this.circuitInventory = new GhostCircuitItemStackHandler(this);
             this.circuitInventory.addNotifiableMetaTileEntity(this);
         }
 
@@ -93,13 +93,13 @@ public class SimpleSteamMetaTileEntity extends SteamMetaTileEntity {
     @Override
     protected IItemHandlerModifiable createImportItemHandler() {
         if (workableHandler == null) return new ItemStackHandler(0);
-        return new NotifiableItemStackHandler(workableHandler.getRecipeMap().getMaxInputs(), this, false);
+        return new NotifiableItemStackHandler(this, workableHandler.getRecipeMap().getMaxInputs(), this, false);
     }
 
     @Override
     protected IItemHandlerModifiable createExportItemHandler() {
         if (workableHandler == null) return new ItemStackHandler(0);
-        return new NotifiableItemStackHandler(workableHandler.getRecipeMap().getMaxOutputs(), this, true);
+        return new NotifiableItemStackHandler(this, workableHandler.getRecipeMap().getMaxOutputs(), this, true);
     }
 
     @Override

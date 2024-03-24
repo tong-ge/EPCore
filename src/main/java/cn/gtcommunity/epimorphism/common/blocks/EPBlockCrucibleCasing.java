@@ -2,6 +2,7 @@ package cn.gtcommunity.epimorphism.common.blocks;
 
 import gregtech.api.block.VariantBlock;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.TextFormattingUtil;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.resources.I18n;
@@ -30,7 +31,7 @@ public class EPBlockCrucibleCasing extends VariantBlock<EPBlockCrucibleCasing.Cr
     public void addInformation(@Nonnull ItemStack stack, @Nullable World world, List<String> tooltip, @Nonnull ITooltipFlag advanced) {
         super.addInformation(stack, world, tooltip, advanced);
         tooltip.add(I18n.format("gregtech.multiblock.blast_furnace.max_temperature",
-                TextFormatting.RED + GTUtility.formatNumbers(getState(stack).getTemperature()) + "K"));
+                TextFormatting.RED + TextFormattingUtil.formatNumbers(getState(stack).getTemperature()) + "K"));
     }
 
     public enum CrucibleType implements IStringSerializable {
