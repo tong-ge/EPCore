@@ -4,6 +4,7 @@ import cn.gtcommunity.epimorphism.loaders.recipe.blocks.*;
 import cn.gtcommunity.epimorphism.loaders.recipe.chains.*;
 import cn.gtcommunity.epimorphism.loaders.recipe.circuits.*;
 import cn.gtcommunity.epimorphism.loaders.recipe.components.*;
+import cn.gtcommunity.epimorphism.loaders.recipe.handlers.EPOreRecipeHandler;
 import cn.gtcommunity.epimorphism.loaders.recipe.multiblocks.*;
 
 public class EPRecipeManager {
@@ -20,6 +21,8 @@ public class EPRecipeManager {
         initCircuits();
         initMultiblockRecipes();
         MachineComponents.init();
+        EPBiologyRecipes.init();
+        EPOreRecipeHandler.processPineOil();
     }
 
     public static void initBlocks() {

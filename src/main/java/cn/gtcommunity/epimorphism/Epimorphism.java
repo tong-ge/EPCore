@@ -65,6 +65,7 @@ public class Epimorphism {
     @Mod.EventHandler
     public void onInit(FMLInitializationEvent event) {
         EPWorldGenRegistry.override();
+        proxy.onLoad();
         try {
             WorldGenRegistry.INSTANCE.reinitializeRegisteredVeins();
         } catch (IOException | RuntimeException exception) {

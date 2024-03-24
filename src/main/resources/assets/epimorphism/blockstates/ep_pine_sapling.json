@@ -1,0 +1,7 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "stage=0": { "model": "epimorphism:pine_sapling" },
+    "stage=1": { "model": "epimorphism:pine_sapling" }
+  }
+}

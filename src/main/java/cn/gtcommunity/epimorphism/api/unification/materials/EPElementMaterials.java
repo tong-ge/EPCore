@@ -38,7 +38,7 @@ public class EPElementMaterials {
                                        .enchantment(Enchantments.EFFICIENCY, 5)
                                        .enchantment(Enchantments.FORTUNE, 5)
                                        .build())
-                .blast(10800, BlastProperty.GasTier.HIGHEST/*, VA[UHV]*/)
+                .blast(b -> b.temp(10800, BlastProperty.GasTier.HIGHEST).blastStats(VA[UHV]))
                 .build();
         //  26002 Awakened Draconium
         AwakenedDraconium = new Material.Builder(getMaterialsId(), gregtechId("awakened_draconium"))
@@ -48,7 +48,7 @@ public class EPElementMaterials {
                 .iconSet(BRIGHT)
                 .flags(GENERATE_PLATE, GENERATE_FOIL, GENERATE_FINE_WIRE)
                 .element(EPElements.AwakenedDraconium)
-                .blast(10800, BlastProperty.GasTier.HIGHEST/*, VA[UV]*/)
+                .blast(b -> b.temp(10800, BlastProperty.GasTier.HIGHEST).blastStats(VA[UV]))
                 .cableProperties(V[UHV], 16, 4)
                 .build();
         //  26003 Chaotic Draconium
@@ -169,7 +169,7 @@ public class EPElementMaterials {
                 .liquid(new FluidBuilder().temperature((int) V[UIV]))
                 .iconSet(CUSTOM_INFINITY)
                 .element(EPElements.Infinity)
-                .blast(12600, BlastProperty.GasTier.HIGHEST/*, VA[UHV], 5901*/)
+                .blast(b -> b.temp(12600, BlastProperty.GasTier.HIGHEST).blastStats(VA[UHV], 5901))
                 .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_FOIL, GENERATE_FINE_WIRE)
                 .build();
         //  26015 Rhugnor
@@ -179,7 +179,7 @@ public class EPElementMaterials {
                 .color(0xBE00FF)
                 .iconSet(BRIGHT)
                 .element(EPElements.Rhugnor)
-                .blast(12000, BlastProperty.GasTier.HIGHEST/*, VA[UHV], 3340*/)
+                .blast(b -> b.temp(12000, BlastProperty.GasTier.HIGHEST).blastStats(VA[UHV], 3340))
                 .flags(GENERATE_PLATE)
                 .build();
         //  26016 Hypogen
@@ -215,7 +215,7 @@ public class EPElementMaterials {
                 .color(0xDCA0F0)
                 .iconSet(BRIGHT)
                 //  TODO may be re-balance
-                .blast(12000, BlastProperty.GasTier.HIGHEST/*, VA[UHV]*/)
+                .blast(b -> b.temp(12000, BlastProperty.GasTier.HIGHEST).blastStats(VA[UHV]))
                 .element(EPElements.AstralTitanium)
                 .flags(GENERATE_PLATE, GENERATE_FOIL)
                 .build();
@@ -227,7 +227,7 @@ public class EPElementMaterials {
                 .color(0x323232)
                 .iconSet(BRIGHT)
                 //  TODO may be re-balance
-                .blast(12000, BlastProperty.GasTier.HIGHEST/*, VA[UHV]*/)
+                .blast(b -> b.temp(12000, BlastProperty.GasTier.HIGHEST).blastStats(VA[UHV]))
                 .element(EPElements.CelestialTungsten)
                 .flags(GENERATE_PLATE, GENERATE_FOIL, GENERATE_ROD, GENERATE_BOLT_SCREW)
                 .build();
@@ -245,7 +245,7 @@ public class EPElementMaterials {
                 .fluid()
                 .color(0xE5A559)
                 .iconSet(BRIGHT)
-                .blast(10800, BlastProperty.GasTier.HIGHEST/*, VA[UV]*/)
+                .blast(b -> b.temp(10800, BlastProperty.GasTier.HIGHEST).blastStats(VA[UV]))
                 .element(EPElements.Ichorium)
                 .flags(GENERATE_PLATE)
                 .build();
@@ -278,7 +278,7 @@ public class EPElementMaterials {
                 .plasma()
                 .color(0x428fdb)
                 .iconSet(DULL)
-                .blast(10900, BlastProperty.GasTier.HIGHEST/*, VA[UHV]*/)
+                .blast(b -> b.temp(10900, BlastProperty.GasTier.HIGHEST).blastStats(VA[UHV]))
                 .element(EPElements.Mithril)
                 .flags(GENERATE_PLATE, GENERATE_FOIL, GENERATE_FINE_WIRE)
                 .build();

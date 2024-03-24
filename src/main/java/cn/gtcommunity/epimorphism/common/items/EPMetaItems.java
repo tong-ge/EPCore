@@ -222,6 +222,25 @@ public class EPMetaItems {
     public static MetaItem<?>.MetaValueItem WRAP_CIRCUIT_OpV;
     public static MetaItem<?>.MetaValueItem WRAP_CIRCUIT_MAX;
 
+    // Biology GT++
+    public static MetaItem<?>.MetaValueItem ROUGH_BIOLOGY_RESIN;
+    public static MetaItem<?>.MetaValueItem PURIFIED_ALUMINIUM_MIXTURE;
+    public static MetaItem<?>.MetaValueItem CELLULOSE_PULP;
+    public static MetaItem<?>.MetaValueItem CELLULOSE_FIBER;
+    public static MetaItem<?>.MetaValueItem CELLULOSE_FIBER_RED;
+    public static MetaItem<?>.MetaValueItem CELLULOSE_FIBER_YELLOW;
+    public static MetaItem<?>.MetaValueItem PINE_CONE;
+    public static MetaItem<?>.MetaValueItem PINE_FRAGMENT;
+    public static MetaItem<?>.MetaValueItem COMPOST;
+    public static MetaItem<?>.MetaValueItem ALGAE_ACID;
+    public static MetaItem<?>.MetaValueItem WOOD_PELLETS;
+    public static MetaItem<?>.MetaValueItem PELLETS_MOULD;
+    public static MetaItem<?>.MetaValueItem ALUMINIUM_PELLETS;
+    public static MetaItem<?>.MetaValueItem SODIUM_ETHYLATE;
+    public static MetaItem<?>.MetaValueItem POTASSIUM_ETHYLATE;
+    public static MetaItem<?>.MetaValueItem SODIUM_ETHYLXANTHATE;
+    public static MetaItem<?>.MetaValueItem POTASSIUM_ETHYLXANTHATE;
+
     //  Debug
     public static MetaItem<?>.MetaValueItem DEBUG_STRUCTURE_WRITER;
     public static MetaItem<?>.MetaValueItem DEBUG_STRUCTURE_BUILDER;

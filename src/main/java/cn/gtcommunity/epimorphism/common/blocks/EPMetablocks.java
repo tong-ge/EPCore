@@ -1,10 +1,16 @@
 package cn.gtcommunity.epimorphism.common.blocks;
 
+import gregtech.api.unification.OreDictUnifier;
 import gregtech.common.blocks.MetaBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.color.BlockColors;
+import net.minecraft.client.renderer.color.ItemColors;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -29,6 +35,9 @@ public class EPMetablocks {
     public static EPBlockGlassCasingB EP_GLASS_CASING_B;
     public static EPBlockAdvGlass EP_ADV_GLASS_CASING;
     public static EPBlockFusionCasing EP_BLOCK_FUSION_CASING;
+    public static EPBlockPineSapling EP_PINE_SAPLING;
+    public static EPBlockPineLog EP_PINE_LOG;
+    public static EPBlockPineLeaves EP_PINE_LEAVES;
 
     private EPMetablocks() {/**/}
 
@@ -71,6 +80,15 @@ public class EPMetablocks {
         EP_ADV_GLASS_CASING.setRegistryName("ep_adv_glass_casing");
         EP_BLOCK_FUSION_CASING = new EPBlockFusionCasing();
         EP_BLOCK_FUSION_CASING.setRegistryName("ep_fusion_casing");
+        EP_PINE_SAPLING = new EPBlockPineSapling();
+        EP_PINE_SAPLING.setRegistryName("ep_pine_sapling");
+        EP_PINE_LOG = new EPBlockPineLog();
+        EP_PINE_LOG.setRegistryName("ep_pine_log");
+        EP_PINE_LEAVES = new EPBlockPineLeaves();
+        EP_PINE_LEAVES.setRegistryName("ep_pine_leaves");
+
+        Blocks.FIRE.setFireInfo(EP_PINE_LOG, 5, 5);
+        Blocks.FIRE.setFireInfo(EP_PINE_LEAVES, 30, 60);
     }
 
     @SideOnly(Side.CLIENT)
@@ -89,6 +107,10 @@ public class EPMetablocks {
         registerItemModel(EP_ADV_GLASS_CASING);
         registerItemModel(EP_BLOCK_FUSION_CASING);
 
+        registerItemModel(EP_PINE_LOG);
+        registerItemModel(EP_PINE_LEAVES);
+        registerItemModel(EP_PINE_SAPLING);
+
         //  VariantActiveBlock Registry
         EP_GLASS_CASING.onModelRegister();
         EP_PMMA_CASING.onModelRegister();
@@ -96,6 +118,23 @@ public class EPMetablocks {
         EP_WIRE_COIL.onModelRegister();
         EP_TRANSPARENT_CASING.onModelRegister();
         EP_GLASS_CASING_B.onModelRegister();
+    }
+
+    @SideOnly(Side.CLIENT)
+    public static void registerColors() {
+        BlockColors blockColors = Minecraft.getMinecraft().getBlockColors();
+        ItemColors itemColors = Minecraft.getMinecraft().getItemColors();
+
+        final int rubberLeavesColor = 0x98de4b;
+
+        blockColors.registerBlockColorHandler((s, w, p, i) -> rubberLeavesColor, EP_PINE_LEAVES);
+        itemColors.registerItemColorHandler((s, i) -> rubberLeavesColor, EP_PINE_LEAVES);
+
+    }
+
+    public static void registerOreDict() {
+        OreDictUnifier.registerOre(new ItemStack(EP_PINE_LOG), "treeLeaves");
+        OreDictUnifier.registerOre(new ItemStack(EP_PINE_LEAVES), "treeSapling");
     }
 
     @SideOnly(Side.CLIENT)

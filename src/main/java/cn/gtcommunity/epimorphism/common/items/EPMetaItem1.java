@@ -222,6 +222,25 @@ public class EPMetaItem1 extends StandardMetaItem {
         //  Mill Balls
         GRINDBALL_SOAPSTONE = this.addItem(370, "mill.grindball_soapstone").setMaxStackSize(1).addComponents(new MillBallBehavior());
         GRINDBALL_ALUMINIUM = this.addItem(371, "mill.grindball_aluminium").setMaxStackSize(1).addComponents(new MillBallBehavior());
+        //Biology GT++
+
+        ROUGH_BIOLOGY_RESIN=this.addItem(372, "item.biology_resin");
+        PURIFIED_ALUMINIUM_MIXTURE=this.addItem(373, "item.aluminium_mixture");
+        CELLULOSE_PULP=this.addItem(374, "item.cellulose_pulp");
+        CELLULOSE_FIBER=this.addItem(375, "item.cellulose_fiber_green");
+        CELLULOSE_FIBER_RED=this.addItem(376, "item.cellulose_fiber_red");
+        CELLULOSE_FIBER_YELLOW=this.addItem(377, "item.cellulose_fiber_yellow");
+        PINE_CONE=this.addItem(378, "item.pine_cone");
+        PINE_FRAGMENT=this.addItem(379, "item.pine_fragment");
+        COMPOST=this.addItem(380, "item.compost");
+        ALGAE_ACID=this.addItem(381, "item.algae_acid");
+        WOOD_PELLETS=this.addItem(382, "item.wood_pellets");
+        PELLETS_MOULD=this.addItem(383, "item.pellets_mould");
+        ALUMINIUM_PELLETS=this.addItem(384, "item.aluminium_pellets");
+        SODIUM_ETHYLATE=this.addItem(385, "item.sodium.ethylate");
+        POTASSIUM_ETHYLATE=this.addItem(386, "item.potassium.ethylate");
+        SODIUM_ETHYLXANTHATE=this.addItem(387, "item.sodium.ethylxanthate");
+        POTASSIUM_ETHYLXANTHATE=this.addItem(388, "item.potassium.ethylxanthate");
 
         //  Wrap Circuits
         WRAP_CIRCUIT_ULV = this.addItem(400, "wrap.circuit.ulv");

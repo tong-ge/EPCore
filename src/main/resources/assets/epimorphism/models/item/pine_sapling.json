@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "cross": "epimorphism:blocks/wood/pine/sapling_pine"
+  }
+}
