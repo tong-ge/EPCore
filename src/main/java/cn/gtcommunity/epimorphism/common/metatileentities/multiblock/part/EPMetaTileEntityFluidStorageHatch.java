@@ -1,18 +1,19 @@
 package cn.gtcommunity.epimorphism.common.metatileentities.multiblock.part;
 
 import appeng.api.config.Actionable;
-import appeng.api.networking.IGridHost;
+import appeng.api.networking.events.MENetworkCellArrayUpdate;
 import appeng.api.networking.security.IActionSource;
-import appeng.api.networking.storage.IBaseMonitor;
 import appeng.api.networking.storage.IStorageGrid;
-import appeng.api.storage.*;
+import appeng.api.storage.ICellProvider;
+import appeng.api.storage.IMEInventory;
+import appeng.api.storage.IMEInventoryHandler;
+import appeng.api.storage.IStorageChannel;
 import appeng.api.storage.data.IAEFluidStack;
 import appeng.api.storage.data.IItemList;
 import appeng.fluids.util.AEFluidStack;
 import appeng.me.GridAccessException;
 import appeng.me.storage.MEInventoryHandler;
 import cn.gtcommunity.epimorphism.api.metatileentity.multiblock.EPMultiblockAbility;
-import cn.gtcommunity.epimorphism.client.renderer.texture.EPTextures;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
@@ -43,7 +44,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class EPMetaTileEntityFluidStorageHatch extends MetaTileEntityAEHostablePart
@@ -51,7 +53,6 @@ public class EPMetaTileEntityFluidStorageHatch extends MetaTileEntityAEHostableP
     private final HatchFluidTank fluidTank;
     private final MEInventoryHandler<IAEFluidStack> meInventoryHandler;
     private boolean workingEnabled;
-    private boolean online;
     public EPMetaTileEntityFluidStorageHatch(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, tier, false);
         this.fluidTank = new HatchFluidTank(20_0000_0000, this);
@@ -64,31 +65,9 @@ public class EPMetaTileEntityFluidStorageHatch extends MetaTileEntityAEHostableP
         try{
             IStorageGrid gridCache = this.getProxy().getGrid().getCache(IStorageGrid.class);
             gridCache.postAlterationOfStoredItems(FLUID_NET,a,getActionSource());
-        }catch (GridAccessException e)
+        }catch (GridAccessException ignored)
         {
 
-        }
-    }
-
-    private void disconnectNetwork()
-    {
-        if(online) {
-            try {
-                IStorageGrid gridCache = this.getProxy().getGrid().getCache(IStorageGrid.class);
-                gridCache.unregisterCellProvider(this);
-            } catch (GridAccessException e) {
-                throw new RuntimeException(e);
-            }
-            online=false;
-        }
-    }
-
-    @Override
-    public void onNeighborChanged() {
-        super.onNeighborChanged();
-        if(!(this.getNeighbor(this.frontFacing) instanceof IGridHost))
-        {
-            disconnectNetwork();
         }
     }
     @Override
@@ -103,29 +82,16 @@ public class EPMetaTileEntityFluidStorageHatch extends MetaTileEntityAEHostableP
     @Override
     public void update() {
         super.update();
-        if (!getWorld().isRemote && this.workingEnabled && this.shouldSyncME()) {
-            if(updateMEStatus()) {
-                try {
-                    IStorageGrid gridCache = this.getProxy().getGrid().getCache(IStorageGrid.class);
-                    if (!online) {
-                        gridCache.registerCellProvider(this);
-                        online = true;
-                    }
-                } catch (GridAccessException e) {
-                    throw new RuntimeException(e);
-                }
+        if (!getWorld().isRemote && this.workingEnabled && this.shouldSyncME()&&updateMEStatus()) {
+            try {
+                this.getProxy().getGrid().postEvent(new MENetworkCellArrayUpdate());
+            } catch (GridAccessException e) {
+                throw new RuntimeException(e);
             }
-            else {
-                disconnectNetwork();
-            }
+
         }
     }
 
-    @Override
-    public void onRemoval() {
-        disconnectNetwork();
-        super.onRemoval();
-    }
 
     @Override
     public boolean isWorkingEnabled() {
@@ -280,7 +246,7 @@ public class EPMetaTileEntityFluidStorageHatch extends MetaTileEntityAEHostableP
 
     @Override
     public IItemList<IAEFluidStack> getAvailableItems(IItemList<IAEFluidStack> iItemList) {
-        new Exception("Getting available items").printStackTrace();
+        //new Exception("Getting available items").printStackTrace();
         iItemList.add(AEFluidStack.fromFluidStack(this.fluidTank.getFluid()));
         return iItemList;
     }
@@ -302,13 +268,6 @@ public class EPMetaTileEntityFluidStorageHatch extends MetaTileEntityAEHostableP
     protected IItemHandlerModifiable createExportItemHandler() {
         return new GTItemStackHandler(this, 1);
     }
-
-    @Override
-    public void gridChanged() {
-        super.gridChanged();
-
-    }
-
 
     private static class HatchFluidTank extends NotifiableFluidTank {
         public HatchFluidTank(int capacity, MetaTileEntityAEHostablePart entityToNotify) {
