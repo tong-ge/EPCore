@@ -122,6 +122,8 @@ public class EPMetaTileEntities {
     public static EPMetaTileEntityQuantumForceTransformer QUANTUM_FORCE_TRANSFORMER;
     public static final EPMetaTileEntityHighTireFusionReactor[] HIGH_TIRE_FUSION_REACTORS = new EPMetaTileEntityHighTireFusionReactor[3];
 
+    public static EPMetaTileEntityFluidStorageHatch FLUID_STORAGE_HATCH;
+
     //  Range: 12301-13300
     private static void registerSimpleSteamMetaTileEntity(SimpleSteamMetaTileEntity[] machines, int startId, String name, RecipeMap<?> recipeMap, SteamProgressIndicator progressIndicator, ICubeRenderer texture, boolean isBricked) {
         machines[0] = registerMetaTileEntity(startId, new SimpleSteamMetaTileEntity(epId(String.format("%s.bronze", name)), recipeMap, progressIndicator, texture, isBricked, false));
@@ -176,6 +178,7 @@ public class EPMetaTileEntities {
         OUTPUT_ENERGY_HATCH_16A[5] = registerSingleMetaTileEntity(31, new EPMetaTileEntityEnergyHatch(epId("energy_hatch.output_16a.uiv"), 11, 16, true));
         OUTPUT_ENERGY_HATCH_16A[6] = registerSingleMetaTileEntity(32, new EPMetaTileEntityEnergyHatch(epId("energy_hatch.output_16a.uxv"), 12, 16, true));
         OUTPUT_ENERGY_HATCH_16A[7] = registerSingleMetaTileEntity(33, new EPMetaTileEntityEnergyHatch(epId("energy_hatch.output_16a.opv"), 13, 16, true));
+        FLUID_STORAGE_HATCH=registerSingleMetaTileEntity(34,new EPMetaTileEntityFluidStorageHatch(epId("fluid_storage_hatch"),GTValues.LuV));
 
         //  Simple Machines range: 12601-12900
         registerSimpleMetaTileEntity(DRYER, 12601, "dryer", EPRecipeMaps.DRYER_RECIPES, EPTextures.DRYER_OVERLAY, true, EPUtils::epId, GTUtility.hvCappedTankSizeFunction);
@@ -262,5 +265,6 @@ public class EPMetaTileEntities {
         HIGH_TIRE_FUSION_REACTORS[0] = registerMultiMetaTileEntity(68, new EPMetaTileEntityHighTireFusionReactor(epId("fusion_reactor.uhv"), GTValues.UHV, EPMetablocks.EP_BLOCK_FUSION_CASING.getState(EPBlockFusionCasing.CasingType.CASING_FUSION_MKIV), EPMetablocks.EP_ADV_GLASS_CASING.getState(EPBlockAdvGlass.AdvGlassType.FUSION_GLASS_IV), MetaBlocks.FUSION_CASING.getState(BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL)));
         HIGH_TIRE_FUSION_REACTORS[1] = registerMultiMetaTileEntity(69, new EPMetaTileEntityHighTireFusionReactor(epId("fusion_reactor.uev"), GTValues.UEV, EPMetablocks.EP_BLOCK_FUSION_CASING.getState(EPBlockFusionCasing.CasingType.CASING_FUSION_MKV), EPMetablocks.EP_ADV_GLASS_CASING.getState(EPBlockAdvGlass.AdvGlassType.FUSION_GLASS_V), MetaBlocks.FUSION_CASING.getState(BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL)));
         HIGH_TIRE_FUSION_REACTORS[2] = registerMultiMetaTileEntity(70, new EPMetaTileEntityHighTireFusionReactor(epId("fusion_reactor.uiv"), GTValues.UIV, EPMetablocks.EP_BLOCK_FUSION_CASING.getState(EPBlockFusionCasing.CasingType.CASING_FUSION_MKVI), EPMetablocks.EP_ADV_GLASS_CASING.getState(EPBlockAdvGlass.AdvGlassType.FUSION_GLASS_VI), MetaBlocks.FUSION_CASING.getState(BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL)));
+
     }
 }
