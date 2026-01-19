@@ -7,7 +7,7 @@
 
 # Epimorphism Core
 
-*By GregTech Chinese Community Team*
+*By Morphism MC (formerly GregTech Chinese Community Team)*
 
 </div>
 
